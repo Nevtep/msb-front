@@ -57,7 +57,8 @@ class Homepage extends React.Component {
                             <header className="major">
                                 <h2>Señales Binarias</h2>
                             </header>
-                            <p>Más de cincuenta señales diarias</p>
+                            <h3>Más de cincuenta señales diarias</h3>
+                            <p>Adipiscing a commodo ante nunc accumsan interdum mi ante adipiscing. A nunc lobortis non nisl amet vis volutpat aclacus nascetur ac non. Lorem curae eu ante amet sapien in tempus ac. Adipiscing id accumsan adipiscing ipsum.</p>
                         </div>
                     </div>
                 </section>

@@ -23,6 +23,9 @@
 
 /* Basic */
 
+	html {
+		scroll-behavior: smooth;
+	}
 	body {
 		background: _palette(bg);
 
@@ -581,24 +584,28 @@
 						background-image: url('../images/icono1.png');
 						background-repeat: no-repeat;
 						background-size: contain;
+						background-position: center;
 					}
 
 					&.analisis-tecnico {
 						background-image: url('../images/icono2.png');
 						background-repeat: no-repeat;
 						background-size: contain;
+						background-position: center;
 					}
 
 					&.psicotrading {
 						background-image: url('../images/icono3.png');
 						background-repeat: no-repeat;
 						background-size: contain;
+						background-position: center;
 					}
 
 					&.gestion {
 						background-image: url('../images/icono4.png');
 						background-repeat: no-repeat;
 						background-size: contain;
+						background-position: center;
 					}
 				}
 			}
@@ -778,7 +785,7 @@
 		border-radius: _size(border-radius);
 		border: 0;
 		box-shadow: inset 0 0 0 1px _palette(border);
-		color: _palette(fg-bold) !important;
+		color: _palette(fg-bold);
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.9em;
@@ -931,16 +938,13 @@
 		&.gradient-section {
 			background: rgb(204,204,204);
 			background: linear-gradient(0deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 50%);
-
-			& > h2 {
-				color: _pallete(dark, fg)
-			}
 		}
 
 		&.academia {
 			@include dark(#333);
 			background-attachment:	fixed;
 			background-image:		url('../images/fondo-academia.jpg');
+			background-position: right;
 			background-size: cover;
 		}
 
@@ -948,6 +952,7 @@
 			@include dark(#333);
 			background-attachment:	fixed;
 			background-image:		url('../images/fondo-inversores.jpg');
+			background-position: right;
 			background-size: cover;
 		}
 	}
@@ -957,8 +962,8 @@
 	#header {
 		@include padding(9em, 0, (0,0,_size(element-margin),0));
 		background-attachment:	fixed;
-		background-image: url('../images/fondo1.jpg');
-		background-position:center center;
+		background-image: url('../images/fondo-head.jpg');
+		background-position: right;
 		background-size: cover;
 		overflow: hidden;
 		position: relative;
@@ -966,15 +971,22 @@
 
 		h1 {
 			margin: 0;
+			color: _palette(dark, fg-bold);
 		}
 
 		p {
 			margin: (_size(element-margin) * 0.5) 0 0 0;
+			color: _palette(dark, fg);
 		}
 
 		.actions {
 			margin: (_size(element-margin) * 1.25) 0 0 0;
 			position: relative;
+
+			.button {
+				color: _palette(dark, fg-bold);
+				box-shadow: inset 0 0 0 1px _palette(dark, border);
+			}
 
 			&:after {
 				background: _palette(dark, border);
@@ -1000,8 +1012,8 @@
 					background-image: url('../images/logo-msb.png');
 					background-repeat: no-repeat;
 					background-size: contain;
-					width: 10em;
-					height: 10em;
+					width: 11em;
+					height: 11em;
 					display: inline-block;
 				}
 			}
@@ -1044,6 +1056,18 @@
 			}
 		}
 	}
+	
+/* Señales */
+
+#senales {
+	text-align: center;
+}
+	
+/* Testimonios */
+
+#testimonios {
+	text-align: center;
+}
 
 /* Footer */
 
@@ -1052,6 +1076,7 @@
 		background-image:		url('../images/fondo-pie.jpg');
 		background-size:				cover;
 		text-align: center;
+		color: _palette(dark, fg-bold);
 
 		.icons {
 			margin: 0;
@@ -1168,7 +1193,7 @@
 			ul {
 				&.major-icons {
 					li {
-						padding: 2em;
+						padding: 1em;
 
 						.icon {
 							height: 7em;
@@ -1183,6 +1208,10 @@
 
 			.main {
 				@include padding(5em, 3em);
+
+				&.inversores {
+					background-position: center;
+				}
 			}
 
 		/* Header */
@@ -1201,7 +1230,6 @@
 
 			#msb {
 				text-align: center;
-				color: _pallete(dark, fg-bold)
 			}
 
 		/* Academia */
@@ -1210,20 +1238,12 @@
 				text-align: center;
 			}
 
-		/* Señales */
+		
 
-		#senales {
+		/* Inversores */
+
+		#inversores {
 			text-align: center;
-		}
-
-		/* Testimonios */
-
-		#testimonios {
-			text-align: center;
-
-			&> header.major h2 {
-				text-align: center !important;
-			}
 		}
 
 	}
