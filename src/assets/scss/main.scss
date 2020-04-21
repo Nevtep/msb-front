@@ -6,11 +6,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic");
 
 @import "css-grid";
-/*
-	Photon by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
 
 @include skel-breakpoints((
 	xlarge: '(max-width: 1680px)',
@@ -575,9 +570,6 @@
 				text-align: center;
 
 				.icon {
-					@include vendor('transform', 'rotate(45deg)');
-					border-radius: _size(border-radius);
-					border: solid 1px _palette(border);
 					display: inline-block;
 					height: 8em;
 					line-height: 8em;
@@ -585,10 +577,28 @@
 					text-align: center;
 					width: 8em;
 
-					&:before {
-						@include vendor('transform', 'rotate(-45deg)');
-						display: inline-block;
-						line-height: inherit;
+					&.indicadores {
+						background-image: url('../images/icono1.png');
+						background-repeat: no-repeat;
+						background-size: contain;
+					}
+
+					&.analisis-tecnico {
+						background-image: url('../images/icono2.png');
+						background-repeat: no-repeat;
+						background-size: contain;
+					}
+
+					&.psicotrading {
+						background-image: url('../images/icono3.png');
+						background-repeat: no-repeat;
+						background-size: contain;
+					}
+
+					&.gestion {
+						background-image: url('../images/icono4.png');
+						background-repeat: no-repeat;
+						background-size: contain;
 					}
 				}
 			}
@@ -918,15 +928,27 @@
 	.main {
 		@include padding(6em, 0);
 
-		&.style1 {
-			background: _palette(bg);
+		&.gradient-section {
+			background: rgb(204,204,204);
+			background: linear-gradient(0deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 50%);
+
+			& > h2 {
+				color: _pallete(dark, fg)
+			}
 		}
 
-		&.style2 {
+		&.academia {
 			@include dark(#333);
-			background-attachment:	fixed,							fixed;
-			background-image:		url('../images/overlay1.png'),		url('../images/header.jpg');
-			background-size:		auto,							cover;
+			background-attachment:	fixed;
+			background-image:		url('../images/fondo-academia.jpg');
+			background-size: cover;
+		}
+
+		&.inversores {
+			@include dark(#333);
+			background-attachment:	fixed;
+			background-image:		url('../images/fondo-inversores.jpg');
+			background-size: cover;
 		}
 	}
 
@@ -934,11 +956,10 @@
 
 	#header {
 		@include padding(9em, 0, (0,0,_size(element-margin),0));
-		@include dark(#4686a0);
-		background-attachment:	fixed,							fixed,							fixed;
-		background-image:		url('../images/overlay2.png'),		url('../images/overlay3.svg'),		linear-gradient(45deg, _palette(accent1-alt) 5%, _palette(accent3-alt) 30%, _palette(accent6-alt));
-		background-position:	top left,						center center,					center center;
-		background-size:		auto,							cover,							cover;
+		background-attachment:	fixed;
+		background-image: url('../images/fondo1.jpg');
+		background-position:center center;
+		background-size: cover;
 		overflow: hidden;
 		position: relative;
 		text-align: center;
@@ -973,6 +994,17 @@
 			opacity: 1;
 			position: relative;
 			z-index: 1;
+
+			.logo {
+				&.brand {
+					background-image: url('../images/logo-msb.png');
+					background-repeat: no-repeat;
+					background-size: contain;
+					width: 10em;
+					height: 10em;
+					display: inline-block;
+				}
+			}
 
 			.actions {
 				@include vendor('transition', 'transform 1.25s ease');
@@ -1017,11 +1049,8 @@
 
 	#footer {
 		@include padding(6em, 0, (0,0,_size(element-margin),0));
-		@include dark(#4686a0);
-		background-attachment:	fixed,							fixed,							fixed;
-		background-image:		url('../images/overlay2.png'),		url('../images/overlay4.svg'),		linear-gradient(45deg, _palette(accent6-alt), _palette(accent3-alt) 50%, _palette(accent1-alt) 95%);
-		background-position:	top left,						center center,					center center;
-		background-size:		auto,							cover,							cover;
+		background-image:		url('../images/fondo-pie.jpg');
+		background-size:				cover;
 		text-align: center;
 
 		.icons {
@@ -1168,17 +1197,34 @@
 				@include padding(5em, 3em, (0,0,_size(element-margin),0));
 			}
 
-		/* One */
+		/* Maxima Señales Binarias */
 
-			#one {
+			#msb {
+				text-align: center;
+				color: _pallete(dark, fg-bold)
+			}
+
+		/* Academia */
+
+			#academia {
 				text-align: center;
 			}
 
-		/* Two */
+		/* Señales */
 
-			#two {
-				text-align: center;
+		#senales {
+			text-align: center;
+		}
+
+		/* Testimonios */
+
+		#testimonios {
+			text-align: center;
+
+			&> header.major h2 {
+				text-align: center !important;
 			}
+		}
 
 	}
 
