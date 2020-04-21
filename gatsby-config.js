@@ -12,8 +12,8 @@ module.exports = {
         name: 'maxima-señales-binarias',
         short_name: 'maximaseñales',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#8F5E33',
+        theme_color: '#8F5E33',
         display: 'minimal-ui',
         icon: 'src/assets/images/logo-msb.png', // This path is relative to the root of the site.
       },
