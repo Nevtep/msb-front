@@ -10,6 +10,7 @@ class Template extends React.Component {
       this.state = {
         loading: 'is-loading'
       }
+      this.footerRef = React.createRef();
     }
 
     componentDidMount () {
@@ -25,13 +26,20 @@ class Template extends React.Component {
     }
 
     render() {
-        const { children } = this.props;
+        const { children, msbRef, academiaRef, senalesRef, inversoresRef, testimoniosRef } = this.props;
 
         return (
             <div className={`body ${this.state.loading}`}>
-                <Header />
+                <Header
+                  msbRef={msbRef}
+                  academiaRef={academiaRef}
+                  senalesRef={senalesRef}
+                  inversoresRef={inversoresRef}
+                  testimoniosRef={testimoniosRef}
+                  contactoRef={this.footerRef}
+                />
                 {children}
-                <Footer />
+                <Footer ref={this.footerRef} />
             </div>
         );
     }

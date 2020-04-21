@@ -29,10 +29,14 @@
 	body {
 		background: _palette(bg);
 
-		.body.is-loading {
-			*, *:before, *:after {
-				@include vendor('animation', 'none !important');
-				@include vendor('transition', 'none !important');
+		.body {
+			margin-top: -67px;
+
+			&.is-loading {
+				*, *:before, *:after {
+					@include vendor('animation', 'none !important');
+					@include vendor('transition', 'none !important');
+				}
 			}
 		}
 	}
@@ -929,6 +933,38 @@
 			}
 		}
 	}
+
+/* Navigation */
+.sticky {
+	position: sticky;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+}
+
+.nav {
+	display: flex;
+	justify-content: center;
+	background-color: transparentize($color: _palette(bg), $amount: 0.5);
+
+	.nav_link {
+		padding: 0.5em;
+		color: _palette(dark, fg-bold);
+		font-weight: bold;
+		border: none;
+		border-bottom: 3px solid transparent;
+		cursor: pointer;
+		outline: none;
+		box-shadow: none;
+		height: 3.5em;
+	
+		&.selected {
+			border-bottom: 3px solid _palette(accent3);
+			color: _palette(accent3);
+		}
+	}
+}
 
 /* Main */
 
