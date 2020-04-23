@@ -28,10 +28,13 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
     
     useEffect(() => {
         const handleScroll = () => {
-            const WTFOffset = 12;
+            const stickyNavOffset = 67;
             const { height: headerHeight } = getDimensions(navRef.current);
             const scrollPosition = window.scrollY + headerHeight;
-            const atBottom = (window.innerHeight + scrollPosition + WTFOffset) >= document.body.offsetHeight;
+            const atBottom = (window.innerHeight + scrollPosition + stickyNavOffset) >= document.body.offsetHeight;
+            console.log('scrollPosition', scrollPosition);
+            console.log('window.innerHeight', window.innerHeight);
+            console.log('document.body.offsetHeight', document.body.offsetHeight);
 
             if(atBottom) {
                 setVisibleSection('Contacto');
@@ -40,7 +43,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
                     const ele = ref.current;
                     if (ele) {
                         const { offsetBottom, offsetTop } = getDimensions(ele);
-                        return scrollPosition > offsetTop && scrollPosition < offsetBottom;
+                        console.log('offsetTop', offsetTop);
+                        console.log('offsetBottom', offsetBottom);
+                        return Math.round(scrollPosition) >= Math.round(offsetTop) && Math.round(scrollPosition) < Math.round(offsetBottom);
                     }
                 });
     
@@ -144,7 +149,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "Header" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(headerRef.current);
+                setTimeout(() => {
+                    scrollTo(headerRef.current);
+                }, 50)
             }}
         >
             INICIO
@@ -154,7 +161,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "MSB" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(msbRef.current);
+                setTimeout(() => {
+                    scrollTo(msbRef.current);
+                }, 50)
             }}
         >
             QUIENES SOMOS
@@ -164,7 +173,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "Academia" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(academiaRef.current);
+                setTimeout(() => {
+                    scrollTo(academiaRef.current);
+                }, 50)
             }}
         >
             ACADEMIA
@@ -174,7 +185,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "Senales" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(senalesRef.current);
+                setTimeout(() => {
+                    scrollTo(senalesRef.current);
+                }, 50)
             }}
         >
             SEÑALES
@@ -184,7 +197,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "Inversores" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(inversoresRef.current);
+                setTimeout(() => {
+                    scrollTo(inversoresRef.current);
+                }, 50)
             }}
         >
             INVERSORES
@@ -194,7 +209,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "Testimonios" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(testimoniosRef.current);
+                setTimeout(() => {
+                    scrollTo(testimoniosRef.current);
+                }, 50)
             }}
         >
             TESTIMONIOS
@@ -204,7 +221,9 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             className={`nav-link ${visibleSection === "Contacto" ? "selected" : ""}`}
             onClick={() => {
                 setMobileOpen(false);
-                scrollTo(contactoRef.current);
+                setTimeout(() => {
+                    scrollTo(contactoRef.current);
+                }, 50)
             }}
         >
             CONTACTO
