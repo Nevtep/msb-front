@@ -4,9 +4,10 @@ import Helmet from "react-helmet";
 import Layout from '../components/layout';
 
 import pic01 from '../assets/images/pic01.jpg'
-import pic02 from '../assets/images/pic02.jpg'
-import pic03 from '../assets/images/pic03.jpg'
-import pic04 from '../assets/images/pic04.jpg'
+
+import testimonio1 from '../assets/images/testimonio1.png';
+import testimonio2 from '../assets/images/testimonio2.png';
+import testimonio3 from '../assets/images/testimonio3.png';
 
 const Homepage = () => {
     const siteTitle = "Máxima Señales Binarias";
@@ -31,7 +32,7 @@ const Homepage = () => {
                         <header className="major">
                             <h2>Máxima Señales Binarias</h2>
                         </header>
-                        <p>Adipiscing a commodo ante nunc accumsan et interdum mi ante adipiscing. A nunc lobortis non nisl amet vis sed volutpat aclacus nascetur ac non. Lorem curae et ante amet sapien sed tempus adipiscing id accumsan.</p>
+                        <p>MSB es una empresa de trading que a llegado a todo Latinoamérica y al mundo, liderado por traders profesionales, rentables y consistentes.  Chistopher Alexis Beas y Nicolás Lescano son conocidos traders del mundo de opciones binarias y CEOs de MSB, Se desarrollan en la educación y el crecimiento personal de los integrantes de MSB, garantizando aprendizaje y resultados consistentes.</p>
                     </div>
                     <div className="col-6">
                         <span className="image fit"><img src={pic01} alt="" /></span>
@@ -53,9 +54,17 @@ const Homepage = () => {
                         <header className="major">
                             <h2>Academia</h2>
                         </header>
-                        <p>Adipiscing a commodo ante nunc accumsan interdum mi ante adipiscing. A nunc lobortis non nisl amet vis volutpat aclacus nascetur ac non. Lorem curae eu ante amet sapien in tempus ac. Adipiscing id accumsan adipiscing ipsum.</p>
-                        <p>Blandit faucibus proin. Ac aliquam integer adipiscing enim non praesent vis commodo nunc phasellus cubilia ac risus accumsan. Accumsan blandit. Lobortis phasellus non lobortis dit varius mi varius accumsan lobortis. Blandit ante aliquam lacinia lorem lobortis semper morbi col faucibus vitae integer placerat accumsan orci eu mi odio tempus adipiscing adipiscing adipiscing curae consequat feugiat etiam dolore.</p>
-                        <p>Adipiscing a commodo ante nunc accumsan interdum mi ante adipiscing. A nunc lobortis non nisl amet vis volutpat aclacus nascetur ac non. Lorem curae eu ante amet sapien in tempus ac. Adipiscing id accumsan adipiscing ipsum.</p>
+                        <ul className="checkmarks">
+                            <li>Rentabilidad de por vida.</li>
+                            <li>Eleva tu nivel de trading al máximo.</li>
+                            <li>Aprende exclusivas estrategias con un 90 % de efectividad.</li>
+                            <li>Domina el mercado como un trader profesional.</li>
+                            <li>Oportunidad exclusiva para obtener nuestros resultados.</li>
+                        </ul>
+                        <p>En nuestra Academia accederás a información exclusiva, te guiaremos paso a paso para que entiendas el manejo de herramientas necesarias para convertirte en inversor profesional y exitoso. Accederás a información de los mercados de capitales que pocas personas tienen posibilidad de conocer. Sobre todo te guiaremos en el camino de obtener tu independencia económica y que logres cambiar tu vida a lo que siempre has soñado.</p>
+                        <ul className="actions">
+                            <li><a href="#" className="button">Inscribite</a></li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -67,7 +76,10 @@ const Homepage = () => {
                             <h2>Señales Binarias</h2>
                         </header>
                         <h3>Más de cincuenta señales diarias</h3>
-                        <p>Adipiscing a commodo ante nunc accumsan interdum mi ante adipiscing. A nunc lobortis non nisl amet vis volutpat aclacus nascetur ac non. Lorem curae eu ante amet sapien in tempus ac. Adipiscing id accumsan adipiscing ipsum.</p>
+                        <p>Diariamente obtendrás señales de ingreso al mercado de opciones binarias, exclusiva información que facilitara tu operatoria. También tendrás accesos a video llamadas para responder dudas y facilitar el camino al éxito y a una nueva forma de vida.</p>
+                        <ul className="actions">
+                            <li><a href="#" className="button">Subscribite</a></li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -78,7 +90,10 @@ const Homepage = () => {
                         <header className="major">
                             <h2>Inversores</h2>
                         </header>
-                        <p>Adipiscing a commodo ante nunc accumsan et interdum mi ante adipiscing. A nunc lobortis non nisl amet vis sed volutpat aclacus nascetur ac non. Lorem curae et ante amet sapien sed tempus adipiscing id accumsan.</p>
+                        <p>En escazas ocasiones permitimos a un cupo limitado de personas, acceder a invertir con nosotros. Los elegidos podrán acceder a importante rentabilidad mensual gracias a la ayuda de la inversión directa de nuestros Master Traders.  Puedes inscribirte y nos comunicaremos en el momento que se abra el acceso a la inversiones.</p>
+                        <ul className="actions">
+                            <li><a href="#" className="button">Conviertete en Inversor</a></li>
+                        </ul>
                     </div>
                     <div className="col-6">
                         <span className="image fit"><img src={pic01} alt="" /></span>
@@ -95,28 +110,20 @@ const Homepage = () => {
                     </div>
 
                     <div className="col-4">
-                        <span className="image fit"><img src={pic02} alt="" /></span>
-                        <h3>Magna feugiat lorem</h3>
-                        <p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante nunc lobortis non amet vis sed volutpat et nascetur.</p>
-                        <ul className="actions">
-                            <li><a href="#" className="button">More</a></li>
-                        </ul>
+                        <span className="image frame"><img src={testimonio1} alt="" /></span>
+                        <h3>Juan</h3>
+                        <p>Hoy día las señales están excelentes.<br />¡Gracias Alexis!</p>
                     </div>
                     <div className="col-4">
-                        <span className="image fit"><img src={pic03} alt="" /></span>
-                        <h3>Magna feugiat lorem</h3>
-                        <p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante nunc lobortis non amet vis sed volutpat et nascetur.</p>
-                        <ul className="actions">
-                            <li><a href="#" className="button">More</a></li>
-                        </ul>
+                        <span className="image frame"><img src={testimonio2} alt="" /></span>
+                        <h3>Iván Ezequiel Rojas</h3>
+                        <p>Siempre se termina con ganancia con las señales.<br /> ¡¡¡Gracias Gracias!!!</p>
                     </div>
                     <div className="col-4">
-                        <span className="image fit"><img src={pic04} alt="" /></span>
-                        <h3>Magna feugiat lorem</h3>
-                        <p>Adipiscing a commodo ante nunc magna lorem et interdum mi ante nunc lobortis non amet vis sed volutpat et nascetur.</p>
-                        <ul className="actions">
-                            <li><a href="#" className="button">More</a></li>
-                        </ul>
+                        <span className="image frame"><img src={testimonio3} alt="" /></span>
+                        <h3>Eliu Alberto</h3>
+                        <p>Cerramos en profits.<br />Gracias por todo</p>
+
                     </div>
 
                 </div>

@@ -510,6 +510,19 @@
 				width: 100%;
 			}
 		}
+
+		&.frame {
+			display: flex;
+			margin: 0 0 _size(element-margin) 0;
+			width: 100%;
+			min-height: 15em;
+
+			img {
+				width: 100%;
+				margin-top: auto;
+				margin-bottom: auto;
+			}
+		}
 	}
 
 /* List */
@@ -544,6 +557,25 @@
 				&:first-child {
 					border-top: 0;
 					padding-top: 0;
+				}
+			}
+		}
+
+		&.checkmarks {
+			cursor: default;
+			list-style: none;
+			padding-left: 0;
+
+			li {
+				padding: 0 1.25em 0 0;
+
+				&::before {
+					font: normal normal normal 14px/1 FontAwesome;
+					font-size: inherit;
+					text-rendering: auto;
+					-webkit-font-smoothing: antialiased;
+					content: "\F00C";
+					padding: 0.5em;
 				}
 			}
 		}
@@ -621,6 +653,7 @@
 			cursor: default;
 			list-style: none;
 			padding-left: 0;
+			text-align: center;
 
 			li {
 				display: inline-block;
