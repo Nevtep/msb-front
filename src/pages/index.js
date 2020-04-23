@@ -79,7 +79,7 @@ const Homepage = () => {
                         <h3>Más de cincuenta señales diarias</h3>
                         <p>Diariamente obtendrás señales de ingreso al mercado de opciones binarias, exclusiva información que facilitara tu operatoria. También tendrás accesos a video llamadas para responder dudas y facilitar el camino al éxito y a una nueva forma de vida.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Subscríbite</a></li>
+                            <li><a href="#" className="button">Subscríbete</a></li>
                         </ul>
                     </div>
                 </div>
