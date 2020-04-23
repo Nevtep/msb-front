@@ -21,20 +21,17 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
     };
 
 
-  const [visibleSection, setVisibleSection] = useState();
+    const [visibleSection, setVisibleSection] = useState();
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const navRef = useRef(null);
     
     useEffect(() => {
         const handleScroll = () => {
+            const WTFOffset = 12;
             const { height: headerHeight } = getDimensions(navRef.current);
             const scrollPosition = window.scrollY + headerHeight;
-            const atBottom = (window.innerHeight + scrollPosition + 12) >= document.body.offsetHeight;
-            console.log('data: %o', {
-                atBottom,
-                compareHeight: window.innerHeight + scrollPosition,
-                documentHeight: document.body.offsetHeight,
-            })
+            const atBottom = (window.innerHeight + scrollPosition + WTFOffset) >= document.body.offsetHeight;
 
             if(atBottom) {
                 setVisibleSection('Contacto');
@@ -71,11 +68,11 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
         { section: "Contacto", ref: contactoRef },
     ];
     
-    return (<div className="sticky">
+    return (<><div className={`sticky ${mobileOpen ? 'open' : ''}`}>
         <div className="nav" ref={navRef}>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "Header" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "Header" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(headerRef.current);
                 }}
@@ -84,7 +81,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "MSB" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "MSB" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(msbRef.current);
                 }}
@@ -93,7 +90,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "Academia" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "Academia" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(academiaRef.current);
                 }}
@@ -102,7 +99,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "Senales" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "Senales" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(senalesRef.current);
                 }}
@@ -111,7 +108,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "Inversores" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "Inversores" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(inversoresRef.current);
                 }}
@@ -120,7 +117,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "Testimonios" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "Testimonios" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(testimoniosRef.current);
                 }}
@@ -129,7 +126,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <button
                 type="button"
-                className={`nav_link ${visibleSection === "Contacto" ? "selected" : ""}`}
+                className={`nav-link ${visibleSection === "Contacto" ? "selected" : ""}`}
                 onClick={() => {
                     scrollTo(contactoRef.current);
                 }}
@@ -137,5 +134,81 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
                 CONTACTO
             </button>
         </div>
-    </div>)
+        <div className={`nav-mobile ${mobileOpen ? "open" : ""}`}>
+            <span className={`nav-toggle fa ${mobileOpen ? 'fa-times' : 'fa-bars'}`} onClick={() => setMobileOpen(!mobileOpen)}></span>
+        </div>
+    </div>
+    <div className={`nav-menu ${mobileOpen ? "open" : ""}`}>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "Header" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(headerRef.current);
+            }}
+        >
+            INICIO
+        </button>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "MSB" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(msbRef.current);
+            }}
+        >
+            QUIENES SOMOS
+        </button>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "Academia" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(academiaRef.current);
+            }}
+        >
+            ACADEMIA
+        </button>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "Senales" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(senalesRef.current);
+            }}
+        >
+            SEÑALES
+        </button>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "Inversores" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(inversoresRef.current);
+            }}
+        >
+            INVERSORES
+        </button>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "Testimonios" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(testimoniosRef.current);
+            }}
+        >
+            TESTIMONIOS
+        </button>
+        <button
+            type="button"
+            className={`nav-link ${visibleSection === "Contacto" ? "selected" : ""}`}
+            onClick={() => {
+                setMobileOpen(false);
+                scrollTo(contactoRef.current);
+            }}
+        >
+            CONTACTO
+        </button>
+    </div>
+</>)
 }

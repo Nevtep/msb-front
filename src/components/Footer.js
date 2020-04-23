@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = React.forwardRef((props, ref) => (
             <section id="footer" ref={ref}>
                 <ul className="icons">
-                    <li><a href="https://api.whatsapp.com/send?phone=5493516277599&text=Hola%20estoy%20interesado%20en%20saber%20m%C3%A1s%20sobre%20M%C3%A1xima%20Se%C3%B1ales%20Binarias" className="icon alt fa-2x fa-whatsapp"><span className="label">Whatsapp</span></a></li>
+                    <li><a href="mailto:maximasebinarias@gmail.com" className="icon alt fa-2x fa-envelope"><span className="label">Gmail</span></a></li>
                     <li><a href="#" className="icon alt fa-2x fa-telegram"><span className="label">Telegram</span></a></li>
                     <li><a href="#" className="icon alt fa-2x fa-youtube-play"><span className="label">Youtube</span></a></li>
                     <li><a href="https://www.instagram.com/maximasenalesbinarias" className="icon alt fa-2x fa-instagram"><span className="label">Instagram</span></a></li>
