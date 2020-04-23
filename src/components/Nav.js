@@ -143,7 +143,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             <span className={`nav-toggle fa ${mobileOpen ? 'fa-times' : 'fa-bars'}`} onClick={() => setMobileOpen(!mobileOpen)}></span>
         </div>
     </div>
-    <div className={`nav-menu ${mobileOpen ? "open" : ""}`}>
+    <div className={`nav-mobile-menu ${mobileOpen ? "open" : ""}`}>
         <button
             type="button"
             className={`nav-link ${visibleSection === "Header" ? "selected" : ""}`}

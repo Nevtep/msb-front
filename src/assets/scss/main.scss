@@ -960,6 +960,7 @@
 		padding: 0.5em;
 		font-size: 0.75em;
 		color: _palette(dark, fg-bold);
+		font-weight: unset;
 		border: none;
 		border-bottom: 3px solid transparent;
 		cursor: pointer;
@@ -985,7 +986,7 @@
 	background-color: transparentize($color: _palette(bg), $amount: 0.5);
 }
 
-.nav-menu {
+.nav-mobile-menu {
 	background-color: _palette(accent6-alt);
 	display: none;
 	flex-grow: 1;
@@ -1421,7 +1422,7 @@
 			}
 		}
 
-		.nav-menu.open {
+		.nav-mobile-menu.open {
 			display: flex;
 			position: sticky;
 			z-index: 9;
