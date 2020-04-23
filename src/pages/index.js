@@ -64,7 +64,7 @@ const Homepage = () => {
                         <p>En nuestra Academia accederás a información exclusiva, te guiaremos paso a paso para que entiendas el manejo de herramientas necesarias para convertirte en inversor profesional y exitoso. Accederás a información de los mercados de capitales que pocas personas tienen posibilidad de conocer. Sobre todo te guiaremos en el camino de obtener tu independencia económica y que logres cambiar tu vida a lo que siempre has soñado.</p>
                         <p>Te enseñaremos uso básico de IQOption, estrategias, y análisis técnico. Vamos a apreder a utilizar las señales con todo lo cursado para que seas un trader verdaderamente rentable.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Inscribite</a></li>
+                            <li><a href="#" className="button">Inscríbete</a></li>
                         </ul>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ const Homepage = () => {
                         <h3>Más de cincuenta señales diarias</h3>
                         <p>Diariamente obtendrás señales de ingreso al mercado de opciones binarias, exclusiva información que facilitara tu operatoria. También tendrás accesos a video llamadas para responder dudas y facilitar el camino al éxito y a una nueva forma de vida.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Subscribite</a></li>
+                            <li><a href="#" className="button">Subscríbite</a></li>
                         </ul>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ const Homepage = () => {
                         </header>
                         <p>En escazas ocasiones permitimos a un cupo limitado de personas, acceder a invertir con nosotros. Los elegidos podrán acceder a importante rentabilidad mensual gracias a la ayuda de la inversión directa de nuestros Master Traders.  Puedes inscribirte y nos comunicaremos en el momento que se abra el acceso a la inversiones.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Conviertete en Inversor</a></li>
+                            <li><a href="#" className="button">Conviértete en Inversor</a></li>
                         </ul>
                     </div>
                     <div className="col-6">
