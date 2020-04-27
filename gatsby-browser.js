@@ -4,4 +4,12 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 
-// You can delete this file if you're not using it
+export const onServiceWorkerUpdateReady = () => {
+    const answer = window.confirm(
+      `Hay actualizaciones en la aplicación. ` +
+        `¿Recargar para ver la última versión??`
+    )
+    if (answer === true) {
+      window.location.reload()
+    }
+  }
