@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import Helmet from "react-helmet";
 
 import Layout from '../components/layout';
 
@@ -8,6 +7,7 @@ import pic01 from '../assets/images/pic01.jpg'
 import testimonio1 from '../assets/images/testimonio1.png';
 import testimonio2 from '../assets/images/testimonio2.png';
 import testimonio3 from '../assets/images/testimonio3.png';
+import SEO from "../components/SEO";
 
 const Homepage = () => {
     const siteTitle = "Máxima Señales Binarias";
@@ -24,7 +24,7 @@ const Homepage = () => {
             inversoresRef={inversoresRef}
             testimoniosRef={testimoniosRef}
         >
-            <Helmet title={siteTitle} />
+            <SEO />
 
             <section id="msb" className="main gradient-section" ref={msbRef}>
                 <div className="grid-wrapper">

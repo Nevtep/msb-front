@@ -1,8 +1,11 @@
 module.exports = {
   siteMetadata: {
     title: "Máxima Señales Binarias",
+    titleTemplate: "%s · Líder en el mundo de opciones binarias",
+    url: 'https://www.maximasenalesbinarias.com',
     author: "Tomás Corellano",
-    description: "A Gatsby.js Starter based on Photon by HTML5 UP"
+    description: "Sitio sobre trading de opciones binarias y forex. Proveedores de academias de trading, señales de operación en opciones binarias, y gestión de inversiones.",
+    image: '/images/logo-msb.png',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
