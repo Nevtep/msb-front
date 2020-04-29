@@ -1,6 +1,41 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Dialog from './Dialog';
+import LoginDialog from './LoginDialog';
+import SignUpDialog from './SignUpDialog';
+import { useMutation } from '@apollo/react-hooks';
+import { navigate } from 'gatsby';
+
+import { CURRENT_USER_QUERY } from '../queries/currentUser';
+import { SIGNUP_MUTATION } from '../mutations/signUp';
+import { LOGIN_MUTATION } from '../mutations/login';
 
 export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, testimoniosRef, contactoRef}) => {
+    const [signup] = useMutation(
+        SIGNUP_MUTATION,
+        {
+            update: (cache, { data: { signup }}) => cache.writeQuery({
+                query: CURRENT_USER_QUERY,
+                data: { currentUser: signup.user },
+            }),
+            onCompleted: (result) => {
+                console.log(result);
+                navigate('/app')
+            },
+        }
+    )
+    const [login] = useMutation(
+        LOGIN_MUTATION,
+        {
+            update: (cache, { data: { login }}) => cache.writeQuery({
+                query: CURRENT_USER_QUERY,
+                data: { currentUser: login.user },
+            }),
+            onCompleted: (result) => {
+                console.log(result);
+                navigate('/app')
+            },
+        }
+    )
     const getDimensions = ele => {
         const { height } = ele.getBoundingClientRect();
         const offsetTop = ele.offsetTop;
@@ -20,12 +55,24 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
         });
     };
 
-
+    
     const [visibleSection, setVisibleSection] = useState();
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
+    const [signupOpen, setSignupOpen] = useState(false);
 
     const navRef = useRef(null);
     
+    const sectionRefs = [
+        { section: "Header", ref: headerRef },
+        { section: "MSB", ref: msbRef },
+        { section: "Academia", ref: academiaRef },
+        { section: "Senales", ref: senalesRef },
+        { section: "Inversores", ref: inversoresRef },
+        { section: "Testimonios", ref: testimoniosRef },
+        { section: "Contacto", ref: contactoRef },
+    ];
+
     useEffect(() => {
         const handleScroll = () => {
             const stickyNavOffset = 67;
@@ -47,6 +94,7 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
                         console.log('offsetBottom', offsetBottom);
                         return Math.round(scrollPosition) >= Math.round(offsetTop) && Math.round(scrollPosition) < Math.round(offsetBottom);
                     }
+                    return null;
                 });
     
                 if (selected && selected.section !== visibleSection) {
@@ -62,18 +110,22 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
         return () => {
           window.removeEventListener("scroll", handleScroll);
         };
-    }, [visibleSection]);
-    const sectionRefs = [
-        { section: "Header", ref: headerRef },
-        { section: "MSB", ref: msbRef },
-        { section: "Academia", ref: academiaRef },
-        { section: "Senales", ref: senalesRef },
-        { section: "Inversores", ref: inversoresRef },
-        { section: "Testimonios", ref: testimoniosRef },
-        { section: "Contacto", ref: contactoRef },
-    ];
+    }, [visibleSection, sectionRefs]);
+
+    const handleLogin = (loginData) => {
+        login({
+            variables: loginData
+        })
+    };
+
+    const handleSignUp = (signupData) => {
+        signup({
+            variables: signupData
+        })
+    };
     
-    return (<><div className={`sticky ${mobileOpen ? 'open' : ''}`}>
+    return (<>
+    <div className={`sticky ${mobileOpen ? 'open' : ''}`}>
         <div className="nav" ref={navRef}>
             <button
                 type="button"
@@ -138,9 +190,17 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             >
                 CONTACTO
             </button>
+            <ul className="actions">
+                <li>
+                    <a href="#" className="button" onClick={() => setLoginOpen(true)}>Ingresar</a>
+                </li>
+                <li>
+                    <a href="#" className="button" onClick={() => setSignupOpen(true)}>Registrarse</a>
+                </li>
+            </ul>
         </div>
         <div className={`nav-mobile ${mobileOpen ? "open" : ""}`}>
-            <span className={`nav-toggle fa ${mobileOpen ? 'fa-times' : 'fa-bars'}`} onClick={() => setMobileOpen(!mobileOpen)}></span>
+            <span role="button" className={`nav-toggle fa ${mobileOpen ? 'fa-times' : 'fa-bars'}`} onClick={() => setMobileOpen(!mobileOpen)}></span>
         </div>
     </div>
     <div className={`nav-mobile-menu ${mobileOpen ? "open" : ""}`}>
@@ -229,5 +289,11 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             CONTACTO
         </button>
     </div>
+    <Dialog open={loginOpen} onClose={() => setLoginOpen(false)}>
+        <LoginDialog onLogin={handleLogin} onCancel={() => setLoginOpen(false)} />
+    </Dialog>
+    <Dialog open={signupOpen} onClose={() => setSignupOpen(false)}>
+        <SignUpDialog onSignUp={handleSignUp} onCancel={() => setSignupOpen(false)} />
+    </Dialog>
 </>)
 }
