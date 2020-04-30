@@ -1,8 +1,18 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
+import { Router } from "@reach/router"
+import { Link } from "gatsby"
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
 import LogoutButton from '../components/LogoutButton';
+
+const Home = ({id, fullName, email}) => (<p>{id}
+<br />
+{fullName}
+<br />
+{email}</p>)
+const Settings = ({}) => <p>Settings</p>
+const Billing = ({}) => <p>Billing</p>
 
 const App = () => {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
@@ -13,21 +23,20 @@ const App = () => {
   const isLoggedIn = !!data.currentUser;
 
   if (isLoggedIn) {
-    const {
-      id,
-      firstName,
-      lastName,
-      email,
-    } = data.currentUser;
 
     return (
       <>
-        {id}
-        <br />
-        {firstName} {lastName}
-        <br />
-        {email}
-        <LogoutButton />
+        <nav>
+            <Link to="/app">Home</Link>{" "}
+            <Link to="/app/settings">Settings</Link>{" "}
+            <Link to="/app/billing">Billing</Link>{" "}
+            <LogoutButton />
+        </nav>
+        <Router>
+            <Home path="/app" {...data.currentUser} />
+            <Settings path="/app/settings" />
+            <Billing path="/app/billing" />
+        </Router>
       </>
     );
   }

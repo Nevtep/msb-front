@@ -8,15 +8,21 @@ import { navigate } from 'gatsby';
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
 import { SIGNUP_MUTATION } from '../mutations/signUp';
 import { LOGIN_MUTATION } from '../mutations/login';
+import { IS_LOGGED_IN_QUERY } from '../queries/isLoggedIn';
 
 export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, testimoniosRef, contactoRef}) => {
     const [signup] = useMutation(
         SIGNUP_MUTATION,
         {
-            update: (cache, { data: { signup }}) => cache.writeQuery({
-                query: CURRENT_USER_QUERY,
-                data: { currentUser: signup.user },
-            }),
+            update: (cache, { data: { signup }}) => {
+                cache.writeData({
+                    data: { isLoggedIn: true },
+                });
+                cache.writeQuery({
+                    query: CURRENT_USER_QUERY,
+                    data: { currentUser: signup.user },
+                })
+            },
             onCompleted: (result) => {
                 console.log(result);
                 navigate('/app')
@@ -26,10 +32,15 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
     const [login] = useMutation(
         LOGIN_MUTATION,
         {
-            update: (cache, { data: { login }}) => cache.writeQuery({
-                query: CURRENT_USER_QUERY,
-                data: { currentUser: login.user },
-            }),
+            update: (cache, { data: { login }}) => {
+                cache.writeData({
+                    data: { isLoggedIn: true },
+                });
+                cache.writeQuery({
+                    query: CURRENT_USER_QUERY,
+                    data: { currentUser: login.user },
+                });
+            },
             onCompleted: (result) => {
                 console.log(result);
                 navigate('/app')

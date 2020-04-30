@@ -7,7 +7,7 @@
 // ./gatsby-node.js
 // Implement the Gatsby API “onCreatePage”. This is
 // called after every page is created.
-const clientRoutes = ['account', 'admin', 'app']; // add all client-only routes to this array
+const clientRoutes = ['app']; // add all client-only routes to this array
 
 exports.onCreatePage = async ({ page, actions }) => {
   // page.matchPath is a special key that's used for matching pages
