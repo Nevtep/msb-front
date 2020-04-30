@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch';
 const cache = new InMemoryCache();
 const client = new ApolloClient({
     cache,
-    uri: 'http://localhost:3000/graphql',
+    uri: 'https://msb-api-test.herokuapp.com/graphql',
     credentials: 'include',
     fetch,
 });
