@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import Layout from '../components/layout';
 
 import pic01 from '../assets/images/pic01.jpg'
-
+import inversores from '../assets/images/inversores.png'
 import testimonio1 from '../assets/images/testimonio1.png';
 import testimonio2 from '../assets/images/testimonio2.png';
 import testimonio3 from '../assets/images/testimonio3.png';
@@ -97,7 +97,7 @@ const Homepage = () => {
                         </ul>
                     </div>
                     <div className="col-6">
-                        <span className="image fit"><img src={pic01} alt="" /></span>
+                        <span className="image fit"><img src={inversores} alt="" /></span>
                     </div>
                 </div>
             </section>
