@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from 'gatsby';
 
 import Layout from '../components/layout';
 
@@ -9,7 +10,8 @@ import testimonio2 from '../assets/images/testimonio2.png';
 import testimonio3 from '../assets/images/testimonio3.png';
 import SEO from "../components/SEO";
 
-const Homepage = () => {
+const Homepage = ({ location }) => {
+    console.log(location)
     const siteTitle = "Máxima Señales Binarias";
     const msbRef = useRef(null);
     const academiaRef = useRef(null);
@@ -64,7 +66,7 @@ const Homepage = () => {
                         <p>En nuestra Academia accederás a información exclusiva, te guiaremos paso a paso para que entiendas el manejo de herramientas necesarias para convertirte en inversor profesional y exitoso. Accederás a información de los mercados de capitales que pocas personas tienen posibilidad de conocer. Sobre todo te guiaremos en el camino de obtener tu independencia económica y que logres cambiar tu vida a lo que siempre has soñado.</p>
                         <p>Te enseñaremos uso básico de IQOption, estrategias, y análisis técnico. Vamos a apreder a utilizar las señales con todo lo cursado para que seas un trader verdaderamente rentable.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Inscríbete</a></li>
+                            <li><Link to="/signup" className="button">Inscríbete</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -79,7 +81,7 @@ const Homepage = () => {
                         <h3>Más de cincuenta señales diarias</h3>
                         <p>Diariamente obtendrás señales de ingreso al mercado de opciones binarias, exclusiva información que facilitara tu operatoria. También tendrás accesos a video llamadas para responder dudas y facilitar el camino al éxito y a una nueva forma de vida.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Subscríbete</a></li>
+                            <li><Link to="/signup" className="button">Subscríbete</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -93,7 +95,7 @@ const Homepage = () => {
                         </header>
                         <p>En escazas ocasiones permitimos a un cupo limitado de personas, acceder a invertir con nosotros. Los elegidos podrán acceder a importante rentabilidad mensual gracias a la ayuda de la inversión directa de nuestros Master Traders.  Puedes inscribirte y nos comunicaremos en el momento que se abra el acceso a la inversiones.</p>
                         <ul className="actions">
-                            <li><a href="#" className="button">Conviértete en Inversor</a></li>
+                            <li><Link to="/signup" className="button">Conviértete en Inversor</Link></li>
                         </ul>
                     </div>
                     <div className="col-6">
@@ -130,18 +132,18 @@ const Homepage = () => {
                 </div>
             </section>
 
-            {/* <section id="four" className="main style2 special">
+            <section id="four" className="main style2 special">
                 <div className="container">
                     <header className="major">
-                        <h2>Ipsum feugiat consequat?</h2>
+                        <h2>¿Estás listo para formar parte del equipo?</h2>
                     </header>
-                    <p>Sed lacus nascetur ac ante amet sapien.</p>
+                    <p>Registrate para acceder al panel de Miembros VIP</p>
                     <ul className="actions uniform">
-                        <li><a href="#" className="button special">Sign Up</a></li>
-                        <li><a href="#" className="button">Learn More</a></li>
+                        <li><Link to="/signup" className="button special">Registrarse</Link></li>
+                        <li><Link href="/#footer" className="button">Contáctanos</Link></li>
                     </ul>
                 </div>
-            </section> */}
+            </section>
         </Layout>
     );
 }

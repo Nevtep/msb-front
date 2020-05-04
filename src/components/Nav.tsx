@@ -1,52 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Dialog from './Dialog';
-import LoginDialog from './LoginDialog';
-import SignUpDialog from './SignUpDialog';
-import { useMutation } from '@apollo/react-hooks';
-import { navigate } from 'gatsby';
-
-import { CURRENT_USER_QUERY } from '../queries/currentUser';
-import { SIGNUP_MUTATION } from '../mutations/signUp';
-import { LOGIN_MUTATION } from '../mutations/login';
-import { IS_LOGGED_IN_QUERY } from '../queries/isLoggedIn';
+import { Link } from 'gatsby';
 
 export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, testimoniosRef, contactoRef}) => {
-    const [signup] = useMutation(
-        SIGNUP_MUTATION,
-        {
-            update: (cache, { data: { signup }}) => {
-                cache.writeData({
-                    data: { isLoggedIn: true },
-                });
-                cache.writeQuery({
-                    query: CURRENT_USER_QUERY,
-                    data: { currentUser: signup.user },
-                })
-            },
-            onCompleted: (result) => {
-                console.log(result);
-                navigate('/app')
-            },
-        }
-    )
-    const [login] = useMutation(
-        LOGIN_MUTATION,
-        {
-            update: (cache, { data: { login }}) => {
-                cache.writeData({
-                    data: { isLoggedIn: true },
-                });
-                cache.writeQuery({
-                    query: CURRENT_USER_QUERY,
-                    data: { currentUser: login.user },
-                });
-            },
-            onCompleted: (result) => {
-                console.log(result);
-                navigate('/app')
-            },
-        }
-    )
+    
     const getDimensions = ele => {
         const { height } = ele.getBoundingClientRect();
         const offsetTop = ele.offsetTop;
@@ -122,18 +78,6 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
           window.removeEventListener("scroll", handleScroll);
         };
     }, [visibleSection, sectionRefs]);
-
-    const handleLogin = (loginData) => {
-        login({
-            variables: loginData
-        })
-    };
-
-    const handleSignUp = (signupData) => {
-        signup({
-            variables: signupData
-        })
-    };
     
     return (<>
     <div className={`sticky ${mobileOpen ? 'open' : ''}`}>
@@ -203,10 +147,10 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
             </button>
             <ul className="actions">
                 <li>
-                    <a href="#" className="button" onClick={() => setLoginOpen(true)}>Ingresar</a>
+                    <Link to="login" className="button">Ingresar</Link>
                 </li>
                 <li>
-                    <a href="#" className="button" onClick={() => setSignupOpen(true)}>Registrarse</a>
+                    <Link to="signup" className="button">Registrarse</Link>
                 </li>
             </ul>
         </div>
@@ -299,12 +243,14 @@ export const Nav = ({headerRef, msbRef, academiaRef, senalesRef, inversoresRef, 
         >
             CONTACTO
         </button>
+        <ul className="actions">
+            <li>
+                <Link to="login" className="button">Ingresar</Link>
+            </li>
+            <li>
+                <Link to="signup" className="button">Registrarse</Link>
+            </li>
+        </ul>
     </div>
-    <Dialog open={loginOpen} onClose={() => setLoginOpen(false)}>
-        <LoginDialog onLogin={handleLogin} onCancel={() => setLoginOpen(false)} />
-    </Dialog>
-    <Dialog open={signupOpen} onClose={() => setSignupOpen(false)}>
-        <SignUpDialog onSignUp={handleSignUp} onCancel={() => setSignupOpen(false)} />
-    </Dialog>
 </>)
 }

@@ -1,0 +1,65 @@
+.access-layout {
+    @include padding(4em, 0, (0,0,_size(element-margin),0));
+    background-attachment:	fixed;
+    background-image: linear-gradient(to bottom, rgba(_palette(bg), 0), _palette(bg)), url('../images/fondo-head.jpg');
+    background-position: right;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+
+    .main {
+        display: flex;
+        justify-content: space-evenly;
+
+        .grid-wrapper, .login {
+
+            .col-6:first-of-type {
+                grid-row: span 4;
+            }
+
+            .actions {
+                margin-top: 1.5em;
+
+                .button {
+                    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+                    margin-bottom: 2em;
+                    &.fb-button {
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            h3, label, .button, p, input {
+                color: _palette(dark, fg-bold);
+            }
+        
+            input {
+                border-color: _palette(dark, border);
+            }
+
+            p {
+                margin-bottom: 1em;
+
+                &.error {
+                    color: _palette(accent1);
+                }
+            }
+        }
+
+        .login {
+            .actions {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    @media screen and (min-width: 981px) {
+        .main {
+            .grid-wrapper {
+                width: initial;
+            }
+        }
+    }
+}

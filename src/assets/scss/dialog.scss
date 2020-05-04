@@ -1,0 +1,76 @@
+
+.blur {
+	background: rgba(60, 60, 60, 0.2);
+    backdrop-filter: blur(4px);
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    z-index: 10;
+    display: none;
+	margin-top: 1em;
+	
+	&.show {
+		display: flex;
+	}
+}
+
+.dialog {
+	z-index: 12;
+    background-color: _palette(dark, border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	margin: auto;
+	margin-top: 3em;
+	width: 30%;
+	
+	section {
+		width: 100%;
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+
+	.dialog-header {
+		background-image: url('../images/fondo-head.jpg');
+		display: flex;
+		justify-content: center;
+		background-size: cover;
+		background-repeat: round;
+		padding: 2em;
+
+		.logo.brand {
+			width: 8em;
+			height: 8em;
+		}
+	}
+
+	.title {
+		text-align: center;
+		margin-top: .75em;
+
+		h3 {
+			margin: 0;
+		}
+		&:after {
+			background: _palette(border);
+			content: '';
+			display: inline-block;
+			height: 1px;
+			margin-top: .5em;
+			width: 6em;
+		}
+	}
+
+	.actions {
+		justify-content: space-around;
+		display: flex;
+		margin-top: 1em;
+
+		.button {
+			&:hover {
+				border-bottom-color: transparent !important;
+				color: _palette(accent3);
+			}
+		}
+	}
+}

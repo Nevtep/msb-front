@@ -1,0 +1,57 @@
+/* Image */
+
+.image {
+    border-radius: _size(border-radius);
+    border: 0;
+    display: inline-block;
+    position: relative;
+
+    img {
+        border-radius: _size(border-radius);
+        display: block;
+    }
+
+    &.left {
+        float: left;
+        padding: 0 1.5em 1em 0;
+        top: 0.25em;
+    }
+
+    &.right {
+        float: right;
+        padding: 0 0 1em 1.5em;
+        top: 0.25em;
+    }
+
+    &.left,
+    &.right {
+        max-width: 40%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &.fit {
+        display: block;
+        margin: 0 0 _size(element-margin) 0;
+        width: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &.frame {
+        display: flex;
+        margin: 0 0 _size(element-margin) 0;
+        width: 100%;
+        min-height: 15em;
+
+        img {
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    }
+}

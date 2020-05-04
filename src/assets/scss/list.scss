@@ -1,0 +1,210 @@
+/* List */
+
+ol {
+    list-style: decimal;
+    margin: 0 0 _size(element-margin) 0;
+    padding-left: 1.25em;
+
+    li {
+        padding-left: 0.25em;
+    }
+}
+
+ul {
+    list-style: disc;
+    margin: 0 0 _size(element-margin) 0;
+    padding-left: 1em;
+
+    li {
+        padding-left: 0.5em;
+    }
+
+    &.alt {
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            border-top: solid 1px _palette(border);
+            padding: 0.5em 0;
+
+            &:first-child {
+                border-top: 0;
+                padding-top: 0;
+            }
+        }
+    }
+
+    &.checkmarks {
+        cursor: default;
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            padding: 0 1.25em 0 0;
+
+            &::before {
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                content: "\F00C";
+                padding: 0.5em;
+            }
+        }
+    }
+
+    &.icons {
+        cursor: default;
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            display: inline-block;
+            padding: 0 1.25em 0 0;
+
+            &:last-child {
+                padding-right: 0;
+            }
+
+            .icon {
+                &:before {
+                    font-size: 1.5em;
+                }
+            }
+        }
+    }
+
+    &.major-icons {
+        list-style: none;
+        padding-left: 0;
+
+        li {
+            display: inline-block;
+            padding: 2.5em;
+            text-align: center;
+
+            .icon {
+                display: inline-block;
+                height: 8em;
+                line-height: 8em;
+                margin: 0;
+                text-align: center;
+                width: 8em;
+
+                &.indicadores {
+                    background-image: url('../images/icono-indicadores.png');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+
+                &.analisis-tecnico {
+                    background-image: url('../images/icono-analisis.png');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+
+                &.psicotrading {
+                    background-image: url('../images/icono-psicotrading.png');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+
+                &.gestion {
+                    background-image: url('../images/icono-gestion.png');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                }
+            }
+        }
+    }
+
+    &.actions {
+        cursor: default;
+        list-style: none;
+        padding-left: 0;
+        text-align: center;
+
+        li {
+            display: inline-block;
+            padding: 0 (_size(element-margin) * 0.5) 0 0;
+            vertical-align: middle;
+
+            &:last-child {
+                padding-right: 0;
+            }
+        }
+
+        &.small {
+            li {
+                padding: 0 (_size(element-margin) * 0.25) 0 0;
+            }
+        }
+
+        &.vertical {
+            li {
+                display: block;
+                padding: (_size(element-margin) * 0.5) 0 0 0;
+
+                &:first-child {
+                    padding-top: 0;
+                }
+
+                > * {
+                    margin-bottom: 0;
+                }
+            }
+
+            &.small {
+                li {
+                    padding: (_size(element-margin) * 0.25) 0 0 0;
+
+                    &:first-child {
+                        padding-top: 0;
+                    }
+                }
+            }
+        }
+
+        &.uniform {
+            li {
+                > * {
+                    min-width: 12em;
+                }
+            }
+        }
+
+        &.fit {
+            display: table;
+            margin-left: (_size(element-margin) * -0.5);
+            padding: 0;
+            table-layout: fixed;
+            width: calc(100% + #{(_size(element-margin) * 0.5)});
+
+            li {
+                display: table-cell;
+                padding: 0 0 0 (_size(element-margin) * 0.5);
+
+                > * {
+                    margin-bottom: 0;
+                }
+            }
+
+            &.small {
+                margin-left: (_size(element-margin) * -0.25);
+                width: calc(100% + #{(_size(element-margin) * 0.25)});
+
+                li {
+                    padding: 0 0 0 (_size(element-margin) * 0.25);
+                }
+            }
+        }
+    }
+}
+
+dl {
+    margin: 0 0 _size(element-margin) 0;
+}
