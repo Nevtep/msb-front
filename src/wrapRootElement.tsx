@@ -6,7 +6,7 @@ import fetch from 'isomorphic-fetch';
 const cache = new InMemoryCache();
 const client = new ApolloClient({
     cache,
-    uri: process.env.GATSBY_API_URL,
+    uri: process.env.GATSBY_API_URI,
     credentials: 'include',
     fetch,
 });
