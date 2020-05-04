@@ -8,7 +8,7 @@ export { wrapRootElement } from './src/wrapRootElement'
 export const onServiceWorkerUpdateReady = () => {
     const answer = window.confirm(
       `Hay actualizaciones en la aplicación. ` +
-        `¿Recargar para ver la última versión??`
+        `¿Recargar para ver la última versión?`
     )
     if (answer === true) {
       window.location.reload()
