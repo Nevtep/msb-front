@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import "../assets/scss/main.scss";
 
 import { Router } from "@reach/router"
 import { Link } from "gatsby"
@@ -10,7 +11,7 @@ const Home = ({id, fullName, email}) => (<p>{id}
 <br />
 {fullName}
 <br />
-{email}</p>)
+Welcome! {email}</p>)
 const Settings = ({}) => <p>Settings</p>
 const Billing = ({}) => <p>Billing</p>
 
