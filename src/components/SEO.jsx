@@ -39,7 +39,7 @@ const SEO = ({ title, description, image, article }) => {
       )}
 
       {seo.image && <meta property="og:image" content={seo.image} />}
-
+      <meta name="google-site-verification" content="k_6bCzm1Bb1rl6WFXB9aF2YiNfmkOduwLPaKsDBCm08" />
     </Helmet>
   )
 }

@@ -12,7 +12,6 @@ import SEO from "../components/SEO";
 
 const Homepage = ({ location }) => {
     console.log(location)
-    const siteTitle = "Máxima Señales Binarias";
     const msbRef = useRef(null);
     const academiaRef = useRef(null);
     const senalesRef = useRef(null);
