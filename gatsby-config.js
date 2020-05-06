@@ -8,6 +8,7 @@ module.exports = {
     image: '/images/logo-msb.png',
   },
   plugins: [
+    'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-manifest`,

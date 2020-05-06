@@ -4,8 +4,9 @@ import { navigate } from 'gatsby';
 
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
 import { LOGOUT_MUTATION } from '../mutations/logout';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const LogoutButton = () => {
+const AccountMenu = ({closeMenu}) => {
     const [logout] = useMutation(
       LOGOUT_MUTATION,
       {
@@ -16,12 +17,17 @@ const LogoutButton = () => {
         onCompleted: () => navigate('/')
       },
     );
+
+    const handleLogout = () => {
+      closeMenu();
+      logout();
+    }
   
-    return (
-      <button onClick={() => logout()}>
+    return (<>
+      <MenuItem onClick={handleLogout}>
         Logout
-      </button>
-    );
+      </MenuItem>
+    </>);
   };
   
-  export default LogoutButton;
+  export default AccountMenu;

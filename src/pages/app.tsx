@@ -3,17 +3,11 @@ import { useQuery } from '@apollo/react-hooks';
 import "../assets/scss/main.scss";
 
 import { Router } from "@reach/router"
-import { Link } from "gatsby"
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
-import LogoutButton from '../components/LogoutButton';
-
-const Home = ({id, fullName, email}) => (<p>{id}
-<br />
-{fullName}
-<br />
-Welcome! {email}</p>)
-const Settings = ({}) => <p>Settings</p>
-const Billing = ({}) => <p>Billing</p>
+import { AccountNav } from '../components/AccountNav';
+import { Home } from '../components/Home';
+import { Settings } from '../components/Settings';
+import { Billing } from '../components/Subscriptions';
 
 const App = () => {
   const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
@@ -24,21 +18,16 @@ const App = () => {
   const isLoggedIn = !!data.currentUser;
 
   if (isLoggedIn) {
-
+    const userInitials = data.currentUser.fullName.split(' ').map((piece: string) => piece.substring(0,1)).join('').toUpperCase();
     return (
-      <>
-        <nav>
-            <Link to="/app">Home</Link>{" "}
-            <Link to="/app/settings">Settings</Link>{" "}
-            <Link to="/app/billing">Billing</Link>{" "}
-            <LogoutButton />
-        </nav>
+      <div className="account-main">
+        <AccountNav initials={userInitials} />
         <Router>
             <Home path="/app" {...data.currentUser} />
             <Settings path="/app/settings" />
             <Billing path="/app/billing" />
         </Router>
-      </>
+      </div>
     );
   }
 
