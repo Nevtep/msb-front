@@ -17,7 +17,7 @@ const Homepage = ({ location }) => {
     const senalesRef = useRef(null);
     const inversoresRef = useRef(null);
     const testimoniosRef = useRef(null);
-    return (
+    return (<div className="marketing-main">
         <Layout
             msbRef={msbRef}
             academiaRef={academiaRef}
@@ -131,7 +131,7 @@ const Homepage = ({ location }) => {
                 </div>
             </section>
 
-            <section id="four" className="main style2 special">
+            <section id="CTA" className="main style2 special">
                 <div className="container">
                     <header className="major">
                         <h2>¿Estás listo para formar parte del equipo?</h2>
@@ -144,7 +144,7 @@ const Homepage = ({ location }) => {
                 </div>
             </section>
         </Layout>
-    );
+    </div>);
 }
 
 export default Homepage;

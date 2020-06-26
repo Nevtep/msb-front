@@ -5,7 +5,6 @@
 @import url('../css/font-awesome.min.css');
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic");
 
-@import "css-grid";
 
 @include skel-breakpoints((
 	xlarge: '(max-width: 1680px)',
@@ -21,85 +20,130 @@
 	boxModel: 'border'
 ));
 
-@import './basic';
 
-@import './section';
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background: _palette(bg);
 
-@import './form';
+    .body {
+        margin-top: -4em;
 
-@import './box';
+        &.is-loading {
+            *, *:before, *:after {
+                @include vendor('animation', 'none !important');
+                @include vendor('transition', 'none !important');
+            }
+        }
+    }
+}
+@include breakpoint(xxsmall) {
 
-@import './icon';
+/* Basic */
 
-@import './image';
+	html, body {
+		min-width: 320px;
+	}
+}
 
-@import './list';
+.logo {
+    &.brand {
+        background-image: url('../images/logo-msb.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 15em;
+        height: 15em;
+        display: inline-block;
+    }
+}
 
-@import './table';
+.marketing-main {
+	@import "css-grid";
 
-@import './button';
+	@import './basic';
 
-@import './dialog'; 
+	@import './section';
 
-@import './navigation';
+	@import './form';
 
-@import './layouts';
+	@import './box';
 
-@import './header';
+	@import './icon';
 
-@import './footer';
+	@import './image';
 
-@import './account';
+	@import './list';
+
+	@import './table';
+
+	@import './button';
+
+	@import './dialog'; 
+
+	@import './navigation';
+
+	@import './layouts';
+
+	@import './header';
+
+	@import './footer';
 
 
-/* Main */
+	/* Main */
 
-	.main {
-		@include padding(6em, 0);
+		.main {
+			@include padding(6em, 0);
 
-		&.gradient-section {
-			background: rgb(204,204,204);
-			background: linear-gradient(0deg, rgba(204,204,204,1) 0%, rgba(255,255,255,1) 50%);
+			&.gradient-section {
+				@include dark(#333);
+				background: _palette(bg);
+				background: linear-gradient(180deg, _palette(bg) 25%, _palette(accent3-alt) 100%);
+			}
+
+			&.academia {
+				@include dark(#333);
+				background-attachment:	fixed;
+				background-image:		url('../images/fondo-academia.jpg');
+				background-position: right;
+				background-size: cover;
+			}
+
+			&.inversores {
+				@include dark(#333);
+				background-attachment:	fixed;
+				background-image:		url('../images/fondo-inversores.jpg');
+				background-position: right;
+				background-size: cover;
+			}
 		}
 
-		&.academia {
-			@include dark(#333);
-			background-attachment:	fixed;
-			background-image:		url('../images/fondo-academia.jpg');
-			background-position: right;
-			background-size: cover;
-		}
+		
+	/* Señales */
 
-		&.inversores {
-			@include dark(#333);
-			background-attachment:	fixed;
-			background-image:		url('../images/fondo-inversores.jpg');
-			background-position: right;
-			background-size: cover;
-		}
+	#senales {
+		text-align: center;
+	}
+		
+	/* Testimonios */
+
+	#testimonios {
+		text-align: center;
 	}
 
-	
-/* Señales */
+	#CTA {
+		@include dark(#333);
+	}
 
-#senales {
-	text-align: center;
+	@import './xlarge';
+	@import './large';
+
+
+	@import './medium';
+
+	@import './small';
+
+	@import './xsmall';
+
+	@import './xxsmall';
 }
-	
-/* Testimonios */
-
-#testimonios {
-	text-align: center;
-}
-
-@import './xlarge';
-@import './large';
-
-
-@import './medium';
-
-@import './small';
-
-@import './xsmall';
-
-@import './xxsmall';

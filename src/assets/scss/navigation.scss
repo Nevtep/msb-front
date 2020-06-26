@@ -15,7 +15,7 @@
 
 .nav {
 	display: flex;
-	justify-content: center;
+	justify-content: start;
 	background-color: transparentize($color: _palette(bg), $amount: 0.5);
 
 	.nav-link {
@@ -29,6 +29,8 @@
 		outline: none;
 		box-shadow: none;
 		height: 3.5em;
+		margin-left: auto;
+		margin-right: auto;
 	
 		&.selected {
 			border-bottom: 3px solid _palette(accent3);
@@ -37,7 +39,7 @@
 	}
 
 	ul.actions {
-		position: absolute;
+		margin-left: auto;
 		right: 0;
 		margin-bottom: 0;
 		align-self: center;
@@ -103,36 +105,5 @@
 			box-shadow: inset 0 0 0 1px _palette(dark, border);
 			color: _palette(dark, fg-bold);
 		}
-	}
-}
-
-.account-nav {
-	background-image: 	url('../images/fondo-pie.jpg');
-	background-size: cover;
-	display: flex;
-	align-items: center;
-
-	.logo.brand {
-		width: 6em;
-		height: 6em;
-	}
-
-	a {
-		font-weight: bold;
-		color: _palette(dark, fg-bold);
-		text-transform: uppercase;
-		text-shadow: 0px 1px 2px black;
-		border-bottom: none;
-		margin-left: 1em;
-		margin-right: 1em;
-
-		&:hover {
-			color: _palette(accent3);
-		}
-	}
-
-	.account-avatar {
-		margin-left: auto;
-		margin-right: 2em;
 	}
 }

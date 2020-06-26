@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const CURRENT_USER_QUERY = gql`
-  query CurrentUserQuery {
-    currentUser {
+export const GET_USERS = gql`
+  query GetUsers {
+    users {
       id
       services {
         startDate

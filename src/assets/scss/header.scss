@@ -18,6 +18,7 @@
     p {
         margin: (_size(element-margin) * 0.5) 0 0 0;
         color: _palette(dark, fg);
+        text-transform: uppercase;
     }
 
     .actions {
@@ -66,17 +67,6 @@
         position: absolute;
         top: 0;
         width: 100%;
-    }
-}
-
-.logo {
-    &.brand {
-        background-image: url('../images/logo-msb.png');
-        background-repeat: no-repeat;
-        background-size: contain;
-        width: 15em;
-        height: 15em;
-        display: inline-block;
     }
 }
 
