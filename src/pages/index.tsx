@@ -36,7 +36,7 @@ const Homepage = ({ location }) => {
                         <p>MSB es una empresa de trading que a llegado a todo Latinoamérica y al mundo, liderado por traders profesionales, rentables y consistentes.  Chistopher Alexis Beas y Nicolás Lescano son conocidos traders del mundo de opciones binarias y CEOs de MSB, Se desarrollan en la educación y el crecimiento personal de los integrantes de MSB, garantizando aprendizaje y resultados consistentes.</p>
                     </div>
                     <div className="col-6">
-                        <span className="image fit"><img src={pic01} alt="" /></span>
+                        <iframe src="https://player.vimeo.com/video/443997322" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                     </div>
                 </div>
             </section>
