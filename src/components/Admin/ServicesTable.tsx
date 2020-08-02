@@ -1,42 +1,31 @@
 import React, { useState, RefObject, forwardRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import { SET_USER } from '../../mutations/setUser';
-import { DELETE_USER } from '../../mutations/deleteUser';
-import { GET_USERS } from '../../queries/getUsers';
 import { useMutation } from '@apollo/react-hooks';
 import { Editable, ColumnData } from '../system/EditableTable';
-import { Input } from '@material-ui/core';
+import { GET_USERS } from '../../queries/getUsers';
 
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 350,
   },
 });
 
-export default function UsersTable({ users, onManageSubscriptions }) {
+export default function ServicesTable({ user, roles }) {
   const classes = useStyles();
   const [errors, setErrors] = useState([]);
+  console.log('roles', roles)
+  const rolesLookup = roles.reduce((result, role) => {
+    result[role.id] = role.name;
+    return result;
+}, {})
   const [columns, setColumns] = useState([
-    { title: 'Nombre Completo', field: 'fullName' },
-    { title: 'Email', field: 'email', initialEditValue: 'initial edit value', hidden: true, searchable: true },
-    {
-      title: 'Servicios',
-      field: 'services',
-      render: (rowData) => {
-        if (rowData) {
-          const { services } = rowData;
-          return <>
-            {services?.map(s => <span>{s.role}</span>)}
-          </>
-        } else {
-          <></>
-        }
-      }
-    },
+    { title: 'Rol', field: 'role', lookup: rolesLookup },
+    { title: 'Fecha de Inicio', field: 'startDate', type: 'date' },
+    { title: 'Fecha de Finalización', field: 'endDate', type: 'date' },
   ]);
   const [setUser, { called, loading: setting }] = useMutation(
     SET_USER,
@@ -72,49 +61,54 @@ export default function UsersTable({ users, onManageSubscriptions }) {
         }],
     }
   )
-  const [deleteUser, { loading: deleting }] = useMutation(DELETE_USER,{
-    refetchQueries: [{
-      query: GET_USERS,
-    }],
-  });
 
-  const onRowAdd = ({__typename, ...user}) =>
+  const onRowAdd = ({__typename, ...service}) =>
     setUser({ 
       variables: {
-        user: user
+        user: {
+            ...user,
+            services: [
+                ...user.services,
+                service
+            ]
+        }
       }
     });
 
-    const onRowUpdate = ({__typename, ...user}: ColumnData, oldData: ColumnData): Promise<any> => 
-      setUser({
+  const onRowUpdate = ({__typename, ...service}: ColumnData, oldData: ColumnData): Promise<any> => {
+      const updateIndex = user.services.findIndex( s => s.id === service.id);
+      const services = [...user.services];
+      services.splice(updateIndex, 1, service);
+      return setUser({
         variables: {
-          user: user
+          user: {
+              ...user,
+              services
+          }
         }
       });
-  
-  const onRowDelete = (oldData: ColumnData) => {
-    console.log('got: ', oldData)
-      return deleteUser({
+  }
+  const onRowDelete = (service: ColumnData) => {
+    const updateIndex = user.services.findIndex( s => s.id === service.id);
+      const services = [...user.services];
+      services.splice(updateIndex, 1);
+      return setUser({
         variables: {
-          id: oldData.id
+          user: {
+              ...user,
+              services
+          }
         }
-      })
+      });
     }
   return (
     <Editable
-      data={users}
-      title={<><Input value="I'm an input" /></>}
+      data={user.services || []}
+      title="Subscripciones"
       columns={columns}
       onRowAdd={onRowAdd}
       onRowDelete={onRowDelete}
       onRowUpdate={onRowUpdate}
-      actions={[
-        {
-          icon: forwardRef((props: any, ref: RefObject<SVGSVGElement>) => <ReceiptIcon {...props} ref={ref} />),
-          tooltip: 'Manage Subscriptions',
-          onClick: (event, rowData) => onManageSubscriptions(rowData),
-        }
-      ]}
     />
   );
 }
