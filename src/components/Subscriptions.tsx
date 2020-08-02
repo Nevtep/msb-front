@@ -6,7 +6,7 @@ import { Box, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio
 export const Billing: React.FC<RouteComponentProps> = () => {
   const [amount, setAmount] = useState(10);
 
-  useEffect(() => {
+  const handlePay = () => {
     paypal.Buttons({
       createOrder: function(data, actions) {
         // This function sets up the details of the transaction, including the amount and line item details.
@@ -27,7 +27,7 @@ export const Billing: React.FC<RouteComponentProps> = () => {
         });
       }
     }).render('#paypal-button');
-  }, []);
+  };
 
   const handleSelectSubscription = (event) => {
     setAmount(parseInt(event.target.value));
