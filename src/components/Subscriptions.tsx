@@ -11,11 +11,11 @@ import { OrderCheckout } from './Subscriptions/OrderCheckout';
 const plans = [
   {
     label: '1 Semana',
-    value: 11
+    value: 15
   },
   {
     label: '1 Mes',
-    value: 31
+    value: 35
   },
   {
     label: '1 Año',
@@ -23,7 +23,13 @@ const plans = [
   },
 ]
 
-export const Billing: React.FC<RouteComponentProps> = () => {
+type User = {}
+
+interface BillingProps extends RouteComponentProps {
+  user: User
+}
+
+export const Billing: React.FC<BillingProps> = ({ user }) => {
   const [selectedPlan, setSelectedPlan] = useState(plans[0]);
   const [activeStep, setActiveStep] = React.useState(0);
 

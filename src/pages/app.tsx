@@ -45,7 +45,7 @@ const App = ({ location }) => {
           <Router>
             <Home path="/app" {...data.currentUser} />
             <Settings path="/app/settings" />
-            <Billing path="/app/billing" />
+            <Billing path="/app/billing" user={data.currentUser} />
             <PrivateRoute
               allowed={TraineeRoles}
               user={data.currentUser}
