@@ -1,59 +1,111 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { Box, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, ButtonBase } from '@material-ui/core';
+import { Box, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, ButtonBase, Typography, Button } from '@material-ui/core';
+import { PlanCard } from './Subscriptions/PlanCard';
+import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import BackspaceIcon from '@material-ui/icons/Backspace';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { HorizontalLinearStepper } from './Subscriptions/Stepper';
+import { OrderCheckout } from './Subscriptions/OrderCheckout';
 
+const plans = [
+  {
+    label: '1 Semana',
+    value: 11
+  },
+  {
+    label: '1 Mes',
+    value: 31
+  },
+  {
+    label: '1 Año',
+    value: 200
+  },
+]
 
 export const Billing: React.FC<RouteComponentProps> = () => {
-  const [amount, setAmount] = useState(10);
+  const [selectedPlan, setSelectedPlan] = useState(plans[0]);
+  const [activeStep, setActiveStep] = React.useState(0);
 
-  const handlePay = () => {
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        // This function sets up the details of the transaction, including the amount and line item details.
-        console.log('about to pay:', amount)
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: amount
-            }
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        // This function captures the funds from the transaction.
-        return actions.order.capture().then(function(details) {
-          // This function shows a transaction success message to your buyer.
-          alert('Transaction completed by ' + details.payer.name.given_name);
-        });
-      }
-    }).render('#paypal-button');
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+  
+  const handleTransaction = (details: any) => {
+    console.log(details);
+    // TODO: Call mutation
+    handleNext();
+  }
 
-  const handleSelectSubscription = (event) => {
-    setAmount(parseInt(event.target.value));
+  const handleSelectSubscription = (plan) => {
+    setSelectedPlan(plan);
+  }
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0: 
+        return (
+          <Box
+            display="flex"
+            justifyContent="space-evenly"
+            width="100%"
+          >
+            {plans.map((plan, index) => <PlanCard key={index} plan={plan} selected={selectedPlan.value === plan.value} onSelect={handleSelectSubscription} />)}
+          </Box>
+        )
+      case 1:
+        return (
+          <OrderCheckout amount={selectedPlan.value} label={selectedPlan.label} onTransactionCompleted={handleTransaction}/>
+        )
+      case 2:
+        return (
+          <Typography variant="h2" align="center">Confirmado!</Typography>
+        )
+    }
   }
 
   return (<main>
     <Box
       display="flex"
-      justifyContent="space-around"
+      flexDirection="column"
       marginTop={3}
     >
-      <Paper elevation={3}>
-        <Box 
-      padding={5}>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">Subscripción</FormLabel>
-          <RadioGroup aria-label="subscription" name="subscription" value={amount} onChange={handleSelectSubscription}>
-            <FormControlLabel value={10} control={<Radio />} label="1 Semana" />
-            <FormControlLabel value={30} control={<Radio />} label="1 Mes" />
-            <FormControlLabel value={200} control={<Radio />} label="1 Año" />
-          </RadioGroup>
-        </FormControl>
-        <div>Usted paga: u$d{amount}</div>
-        <div id="paypal-button"></div>
-        </Box>
-      </Paper>
+      <Typography variant="h3">
+      Subscripción
+      </Typography>
+      <Box
+        marginY={3}
+        textAlign="center"
+      >
+        <HorizontalLinearStepper activeStep={activeStep} steps={['Seleccione un plan', 'Verifique y pague', 'Confirmación de pago']} />
+      </Box>
+      {getStepContent(activeStep)}
+      <Box marginTop={3} textAlign="center">
+        {activeStep === 0 && (
+          <Button
+            variant="contained"
+            color="primary"
+            endIcon={(<VerifiedUserIcon />)}
+            onClick={handleNext}
+          >
+            Confirmar
+          </Button>
+        )}
+        {activeStep === 1 && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={(<BackspaceIcon />)}
+            onClick={handleBack}
+          >
+            Cancelar
+          </Button>
+        )}
+      </Box>
     </Box>
   </main>)
 }

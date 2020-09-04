@@ -147,3 +147,65 @@ body {
 
 	@import './xxsmall';
 }
+
+.account-main {
+	background: #fff;
+	height: 100vh;
+	font-family: "Source Sans Pro", Helvetica, sans-serif;
+	/* Main */
+
+	.main {
+		@include padding(6em, 0);
+
+		@import "css-grid";
+
+		@import './basic';
+
+		@import './section';
+
+		@import './form';
+
+		@import './box';
+
+		@import './icon';
+
+		@import './image';
+
+		@import './list';
+
+		@import './table';
+
+		@import './button';
+
+		height: 100vh;
+
+		&.gradient-section {
+			@include dark(#333);
+			background: _palette(bg);
+			background: linear-gradient(180deg, _palette(bg) 25%, _palette(accent3-alt) 100%);
+		}
+
+		&.academia {
+			@include dark(#333);
+			background-attachment:	fixed;
+			background-image:		url('../images/fondo-academia.jpg');
+			background-position: right;
+			background-size: cover;
+		}
+
+		&.inversores {
+			@include dark(#333);
+			background-attachment:	fixed;
+			background-image:		url('../images/fondo-inversores.jpg');
+			background-position: right;
+			background-size: cover;
+		}
+	}
+
+	
+	/* Señales */
+
+	#senales {
+		text-align: center;
+	}
+}
