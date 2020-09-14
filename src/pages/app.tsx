@@ -16,6 +16,7 @@ import PrivateRoute from '../components/Admin/AdminRoute';
 import { AdminSignals } from '../components/Admin/AdminSignals';
 import { AdminUsers } from '../components/Admin/AdminUsers';
 import { VipRoles, TraineeRoles, AdminRoles, InvestorRoles } from '../services/auth';
+import { navigate } from 'gatsby';
 
 const theme = createMuiTheme({
   palette: {
@@ -88,7 +89,7 @@ const App = ({ location }) => {
   }
 
   // SIGNUP AND LOGIN GO HERE
-  return <SignupForm />;
+  navigate('/login');
 };
 
 export default App;

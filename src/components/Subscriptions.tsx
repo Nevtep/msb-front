@@ -7,23 +7,26 @@ import BackspaceIcon from '@material-ui/icons/Backspace';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { HorizontalLinearStepper } from './Subscriptions/Stepper';
 import { OrderCheckout } from './Subscriptions/OrderCheckout';
+import { CURRENT_USER_QUERY } from '../queries/currentUser';
+import { CurrentUserQuery_currentUser as User } from '../queries/__generated__/CurrentUserQuery';
+import { useMutation } from '@apollo/react-hooks';
+import { CONFIRM_SUBSCRIPTION } from '../mutations/confirmSubscription';
+import { ConfirmSubscription, ConfirmSubscriptionVariables } from '../mutations/__generated__/ConfirmSubscription';
 
 const plans = [
   {
-    label: '1 Semana',
-    value: 15
+    label: '15 dias',
+    value: 30
   },
   {
     label: '1 Mes',
-    value: 35
+    value: 50
   },
   {
     label: '1 Año',
     value: 200
   },
 ]
-
-type User = {}
 
 interface BillingProps extends RouteComponentProps {
   user: User
@@ -33,7 +36,11 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
   const [selectedPlan, setSelectedPlan] = useState(plans[0]);
   const [activeStep, setActiveStep] = React.useState(0);
 
-
+  const [confirmSubscription] = useMutation<ConfirmSubscription, ConfirmSubscriptionVariables>(CONFIRM_SUBSCRIPTION, {
+    refetchQueries:[ {
+      query: CURRENT_USER_QUERY
+    }]
+  })
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -42,8 +49,11 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
   };
   
   const handleTransaction = (details: any) => {
-    console.log(details);
-    // TODO: Call mutation
+    confirmSubscription({
+      variables: {
+        purchaseId: details.id
+      }
+    })
     handleNext();
   }
 
@@ -65,7 +75,7 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
         )
       case 1:
         return (
-          <OrderCheckout amount={selectedPlan.value} label={selectedPlan.label} onTransactionCompleted={handleTransaction}/>
+          <OrderCheckout amount={selectedPlan.value} referenceId={user.id} onTransactionCompleted={handleTransaction}/>
         )
       case 2:
         return (

@@ -12,5 +12,5 @@ export interface ConfirmSubscription {
 }
 
 export interface ConfirmSubscriptionVariables {
-  purchaseID: string;
+  purchaseId: string;
 }

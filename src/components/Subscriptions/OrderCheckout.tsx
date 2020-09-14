@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Paper, Typography, Radio, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import crypto from 'crypto';
 
 type OrderCheckoutProps = {
     amount: number
@@ -32,13 +33,14 @@ export const OrderCheckout: React.FC<OrderCheckoutProps> = ({
                     amount: {
                     value: amount
                     },
-                    reference_id: referenceId
+                    reference_id: crypto.createHash('sha512').update(referenceId).digest("hex")
                 }]
                 });
             },
             onApprove: function(data, actions) {
                 // This function captures the funds from the transaction.
                 return actions.order.capture().then(function(details) {
+                    console.log(details);
                     onTransactionCompleted(details)
                 });
             }

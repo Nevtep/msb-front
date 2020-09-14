@@ -4,10 +4,10 @@ export const CURRENT_USER_QUERY = gql`
   query CurrentUserQuery {
     currentUser {
       id
-      services {
+      subscriptions {
         startDate
         endDate
-        role
+        name
       }
       fullName
       email

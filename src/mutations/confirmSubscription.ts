@@ -1,7 +1,16 @@
 import gql from 'graphql-tag';
 
 export const CONFIRM_SUBSCRIPTION = gql`
-mutation ConfirmSubscription($purchaseID: ID!) {
-  confirmSubscription(purchaseID: $purchaseID)
+mutation ConfirmSubscription($purchaseId: String!) {
+  confirmSubscription(purchaseId: $purchaseId) {
+    id
+    subscriptions {
+      id
+      name
+      startDate
+      endDate
+      paymentRef
+    }
+  }
 }
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Link } from 'gatsby';
 
-export const Signals: React.FC<RouteComponentProps> = () => <section id="senales" className="main gradient-section">
+const NotSubscribed = () => (<section id="senales" className="main gradient-section">
 <div className="grid-wrapper">
     <div className="col-12">
         <header className="major">
@@ -15,4 +15,6 @@ export const Signals: React.FC<RouteComponentProps> = () => <section id="senales
         </ul>
     </div>
 </div>
-</section>
+</section>);
+
+export const Signals: React.FC<RouteComponentProps> = () => <NotSubscribed />

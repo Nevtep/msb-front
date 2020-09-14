@@ -7,15 +7,15 @@ export const isLoggedIn = () => {
 };
 
 export const isAuthenticated = (roles) => (user) => {
-    return true;
-    return user.services.some(s => roles.includes(s.role) && s.startDate < Date.now() < s.endDate)
+    console.log(user);
+    return user.subscriptions.some(s => roles.includes(s.name) && s.startDate < Date.now() < s.endDate)
 };
 
 export enum Roles {
-    VIP,
-    TRAINEE,
-    INVESTOR,
-    ADMIN
+    VIP = 'VIP',
+    TRAINEE = 'TRAINEE',
+    INVESTOR = 'INVESTOR',
+    ADMIN = 'ADMIN'
 }
 export const VipRoles = [Roles.VIP, Roles.ADMIN, Roles.INVESTOR];
 export const InvestorRoles = [Roles.INVESTOR, Roles.ADMIN];

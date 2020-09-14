@@ -28,9 +28,9 @@ export default function UsersTable({ users, onManageSubscriptions }) {
       field: 'services',
       render: (rowData) => {
         if (rowData) {
-          const { services } = rowData;
+          const { subscriptions } = rowData;
           return <>
-            {services?.map(s => <span>{s.role}</span>)}
+            {subscriptions?.map(s => <span>{s.name}</span>)}
           </>
         } else {
           <></>
@@ -85,12 +85,12 @@ export default function UsersTable({ users, onManageSubscriptions }) {
       }
     });
 
-    const onRowUpdate = ({__typename, ...user}: ColumnData, oldData: ColumnData): Promise<any> => 
-      setUser({
-        variables: {
-          user: user
-        }
-      });
+  const onRowUpdate = ({__typename, ...user}: ColumnData, oldData: ColumnData): Promise<any> => 
+    setUser({
+      variables: {
+        user: user
+      }
+    });
   
   const onRowDelete = (oldData: ColumnData) => {
     console.log('got: ', oldData)
