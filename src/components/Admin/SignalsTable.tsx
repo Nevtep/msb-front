@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SignalsTable({ signals }) {
+export default function SignalsTable({ signals, UploadButton }) {
   const classes = useStyles();
   const [errors, setErrors] = useState([]);
   const [columns, setColumns] = useState([
@@ -96,7 +96,12 @@ export default function SignalsTable({ signals }) {
     <Editable
       data={signals}
       columns={columns}
-      title="Señales"
+      title={(
+        <div>
+          <h1>Señales</h1>
+          <UploadButton />
+        </div>
+      )}
       onRowAdd={onRowAdd}
       onRowDelete={onRowDelete}
     />
