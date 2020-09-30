@@ -21,35 +21,36 @@ export default function SignalsTable({ signals }) {
   const classes = useStyles();
   const [errors, setErrors] = useState([]);
   const [columns, setColumns] = useState([
-    { title: 'Operación', field: 'op' },
+    { title: 'Operación', field: 'op', lookup: { CALL: 'Compra', PUT: 'Venta' } },
     { title: 'Par', field: 'pair' },
     {
       title: 'Hora',
       field: 'time',
+      type: 'datetime',
     },
   ]);
   const [setSignal, { called, loading: setting }] = useMutation(
     ADD_SIGNAL,
     {
-        update: async (cache, { data: { setSignal: signal }}) => {
-          console.log(signal);
-          const {signals}: any = await cache.readQuery({
-            query: GET_SIGNALS
-          });
-          const dataUpdate: any = [...signals]
-          const index = signals.indexOf(signals.find(u => u.email === signal.email));
-          if (index > -1) {
-            dataUpdate[index] = signal;
-          } else {
-            dataUpdate.push(signal);
-          }
-          cache.writeQuery({
-            query: GET_SIGNALS,
-            data: {
-              signals: dataUpdate
-            }
-          })
-        },
+        // update: async (cache, { data: { setSignal: signal }}) => {
+        //   console.log(signal);
+        //   const {signals}: any = await cache.readQuery({
+        //     query: GET_SIGNALS
+        //   });
+        //   const dataUpdate: any = [...signals]
+        //   const index = signals.indexOf(signals.find(u => u.email === signal.email));
+        //   if (index > -1) {
+        //     dataUpdate[index] = signal;
+        //   } else {
+        //     dataUpdate.push(signal);
+        //   }
+        //   cache.writeQuery({
+        //     query: GET_SIGNALS,
+        //     data: {
+        //       signals: dataUpdate
+        //     }
+        //   })
+        // },
         onCompleted: (result) => {
             console.log('setSignal finished:', result);
         },
@@ -68,10 +69,11 @@ export default function SignalsTable({ signals }) {
     }],
   });
 
-  const onRowAdd = ({__typename, ...signal}) =>
+  const onRowAdd = ({__typename, time, ...signal}) =>
     setSignal({ 
       variables: {
-        signal: signal
+        ...signal,
+        time: time.getTime()
       }
     });
 
@@ -97,7 +99,6 @@ export default function SignalsTable({ signals }) {
       title="Señales"
       onRowAdd={onRowAdd}
       onRowDelete={onRowDelete}
-      onRowUpdate={onRowUpdate}
     />
   );
 }
