@@ -1,3 +1,8 @@
 extend type Query {
     isLoggedIn: Boolean
+    selectedUser: User
+}
+
+extend type Mutation {
+    selectUser(user: UserInput): User
 }

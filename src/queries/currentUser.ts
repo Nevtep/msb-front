@@ -5,6 +5,7 @@ export const CURRENT_USER_QUERY = gql`
     currentUser {
       id
       subscriptions {
+        id
         startDate
         endDate
         name

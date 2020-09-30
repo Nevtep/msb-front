@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-export const SET_USER = gql`
-mutation SetUser($user: UserInput) {
-  setUser(user: $user) {
+export const UPLOAD_SIGNALS = gql`
+mutation UploadSignals($file: Upload!) {
+  uploadSignals(file: $file) {
     id
     email
     fullName

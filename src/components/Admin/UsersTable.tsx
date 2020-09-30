@@ -22,18 +22,19 @@ export default function UsersTable({ users, onManageSubscriptions }) {
   const [errors, setErrors] = useState([]);
   const [columns, setColumns] = useState([
     { title: 'Nombre Completo', field: 'fullName' },
-    { title: 'Email', field: 'email', initialEditValue: 'initial edit value', hidden: true, searchable: true },
+    { title: 'Email', field: 'email', initialEditValue: 'initial edit value', hidden: false, searchable: true },
     {
       title: 'Servicios',
-      field: 'services',
+      field: 'subscriptions',
+      editable: 'never',
       render: (rowData) => {
         if (rowData) {
           const { subscriptions } = rowData;
           return <>
-            {subscriptions?.map(s => <span>{s.name}</span>)}
+            {subscriptions?.map(s => <span key={s.id}>{s.name}</span>)}
           </>
         } else {
-          <></>
+          <>Empty</>
         }
       }
     },

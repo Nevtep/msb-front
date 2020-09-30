@@ -1,14 +1,14 @@
 import gql from 'graphql-tag';
 
-export const GET_USERS = gql`
-  query GetUsers {
-    users {
+export const SELECTED_USER = gql`
+  query SelectedUser {
+    selectedUser @client {
       id
       subscriptions {
+        id
         startDate
         endDate
         name
-        id
       }
       fullName
       email

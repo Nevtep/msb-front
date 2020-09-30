@@ -42,8 +42,11 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props: any, ref: RefObject<SVGSVGElement>) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props: any, ref: RefObject<SVGSVGElement>) => <ViewColumn {...props} ref={ref} />),
   };
+export type EditableProps = { 
+  [index: string]: any
+}
 
-export function Editable({ data, title, columns, onRowAdd, onRowUpdate, onRowDelete, ...props }) {
+export function Editable({ data, title, columns, onRowAdd, onRowUpdate, onRowDelete, ...props }: EditableProps) {
     return (
       <MaterialTable
         title={title}

@@ -2,10 +2,12 @@ import React, { useState, RefObject, forwardRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ReceiptIcon from '@material-ui/icons/Receipt';
-import { SET_USER } from '../../mutations/setUser';
+import { ADD_ROLE } from '../../mutations/addRole';
+import { REMOVE_ROLE } from '../../mutations/removeRole';
 import { useMutation } from '@apollo/react-hooks';
 import { Editable, ColumnData } from '../system/EditableTable';
 import { GET_USERS } from '../../queries/getUsers';
+import { SELECTED_USER } from '../../queries/selectedUser';
 
 
 const useStyles = makeStyles({
@@ -19,38 +21,59 @@ export default function ServicesTable({ user, roles }) {
   const [errors, setErrors] = useState([]);
   console.log('roles', roles)
   const rolesLookup = roles.reduce((result, role) => {
-    result[role.id] = role.name;
+    result[role.name] = role.name;
     return result;
 }, {})
   const [columns, setColumns] = useState([
-    { title: 'Rol', field: 'role', lookup: rolesLookup },
+    { title: 'Rol', field: 'name', lookup: rolesLookup },
     { title: 'Fecha de Inicio', field: 'startDate', type: 'date' },
     { title: 'Fecha de Finalización', field: 'endDate', type: 'date' },
   ]);
-  const [setUser, { called, loading: setting }] = useMutation(
-    SET_USER,
+  const [addRole, { called, loading: setting }] = useMutation(
+    ADD_ROLE,
     {
-        update: async (cache, { data: { setUser: user }}) => {
-          console.log(user);
-          const {users}: any = await cache.readQuery({
-            query: GET_USERS
-          });
-          const dataUpdate: any = [...users]
-          const index = users.indexOf(users.find(u => u.email === user.email));
-          if (index > -1) {
-            dataUpdate[index] = user;
-          } else {
-            dataUpdate.push(user);
-          }
-          cache.writeQuery({
-            query: GET_USERS,
-            data: {
-              users: dataUpdate
-            }
-          })
-        },
+        // update: async (cache, { data: { addRole: user }}) => {
+        //   console.log(user);
+        //   const {users}: any = await cache.readQuery({
+        //     query: GET_USERS
+        //   });
+        //   const dataUpdate: any = [...users]
+        //   const index = users.indexOf(users.find(u => u.email === user.email));
+        //   if (index > -1) {
+        //     dataUpdate[index] = user;
+        //   } else {
+        //     dataUpdate.push(user);
+        //   }
+        //   cache.writeQuery({
+        //     query: GET_USERS,
+        //     data: {
+        //       users: dataUpdate
+        //     }
+        //   })
+        //   cache.writeQuery({
+        //     query: SELECTED_USER,
+        //     data: {
+        //       selectedUser: user
+        //     }
+        //   })
+        // },
         onCompleted: (result) => {
-            console.log('setUser finished:', result);
+            console.log('addRole finished:', result);
+        },
+        onError: (error) => {
+            const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));
+            setErrors(newErrors);
+        },
+        refetchQueries: [{
+          query: GET_USERS,
+        }],
+    }
+  )
+  const [removeRole, { called: removed, loading: removing }] = useMutation(
+    REMOVE_ROLE,
+    {
+        onCompleted: (result) => {
+            console.log('addRole finished:', result);
         },
         onError: (error) => {
             const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));
@@ -63,52 +86,27 @@ export default function ServicesTable({ user, roles }) {
   )
 
   const onRowAdd = ({__typename, ...service}) =>
-    setUser({ 
+    addRole({ 
       variables: {
-        user: {
-            ...user,
-            services: [
-                ...user.services,
-                service
-            ]
-        }
+        userId: user.id,
+        ...service
       }
     });
 
-  const onRowUpdate = ({__typename, ...service}: ColumnData, oldData: ColumnData): Promise<any> => {
-      const updateIndex = user.services.findIndex( s => s.id === service.id);
-      const services = [...user.services];
-      services.splice(updateIndex, 1, service);
-      return setUser({
-        variables: {
-          user: {
-              ...user,
-              services
-          }
-        }
-      });
-  }
   const onRowDelete = (service: ColumnData) => {
-    const updateIndex = user.services.findIndex( s => s.id === service.id);
-      const services = [...user.services];
-      services.splice(updateIndex, 1);
-      return setUser({
+      return removeRole({
         variables: {
-          user: {
-              ...user,
-              services
-          }
+          id: service.id
         }
       });
     }
   return (
     <Editable
-      data={user.services || []}
+      data={user.subscriptions || []}
       title="Subscripciones"
       columns={columns}
       onRowAdd={onRowAdd}
       onRowDelete={onRowDelete}
-      onRowUpdate={onRowUpdate}
     />
   );
 }

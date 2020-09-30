@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { GET_USERS } from '../../queries/getUsers';
 import UsersTable from './UsersTable';
 import { Dialog } from '@material-ui/core';
 import ServicesTable from './ServicesTable';
 import { GET_ROLES } from '../../queries/getRoles';
+import { SELECTED_USER } from '../../queries/selectedUser';
+import { SELECT_USER } from '../../mutations/selectUser';
 
 export const AdminUsers = (props) => {
     const { data } = useQuery(GET_USERS);
     const { data: rolesData } = useQuery(GET_ROLES);
     const [open, setOpen] = useState(false);
-    const [selectedUser, setSelectedUser] = useState(null);
+    const { data: { selectedUser } } = useQuery(SELECTED_USER);
+    const [setSelectedUser] = useMutation(SELECT_USER, {
+        onCompleted: (result) => {
+            setOpen(true);
+        }
+    });
 
     const manageSubscriptions = (user) => {
-        setSelectedUser(user);
-        setOpen(true);
+        setSelectedUser({ 
+            variables: {
+                user
+            },
+        });
     }
     return (<>
         <UsersTable {...data} onManageSubscriptions={manageSubscriptions} />
