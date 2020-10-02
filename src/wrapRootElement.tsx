@@ -54,7 +54,7 @@ const link = process.browser ? split(
     },
     wsLink,
     uploadLink,
-  ): uploadLink;
+  ) : uploadLink;
 const client = new ApolloClient({
     typeDefs,
     resolvers,
