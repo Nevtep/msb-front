@@ -139,7 +139,7 @@ const Homepage = ({ location }) => {
                     <p>Registrate para acceder al panel de Miembros VIP</p>
                     <ul className="actions uniform">
                         <li><Link to="/signup" className="button special">Registrarse</Link></li>
-                        <li><Link href="/#footer" className="button">Contáctanos</Link></li>
+                        <li><Link to="/#footer" className="button">Contáctanos</Link></li>
                     </ul>
                 </div>
             </section>
