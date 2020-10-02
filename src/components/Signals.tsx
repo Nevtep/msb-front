@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Link } from 'gatsby';
-import { Box } from '@material-ui/core';
+import { Box, TextField } from '@material-ui/core';
 import { baseTheme } from '../assets/theme';
 import SignalsList from './SignalsList';
-import { useQuery, useSubscription } from '@apollo/react-hooks';
+import { useMutation, useQuery, useSubscription } from '@apollo/react-hooks';
 import { GET_SIGNALS } from '../queries/getSignals';
 import MessageList from './MessageList';
 import { VIP_MESSAGES, VIP_SIGNALS } from '../subscriptions';
+import { SEND_MESSAGE } from '../mutations/sendMessage';
+import { SEND_SIGNAL } from '../mutations/sendSignal';
+import { AdminRoles, isAuthenticated } from '../services/auth';
 
 const NotSubscribed = () => (<section id="senales" className="main gradient-section">
 <div className="grid-wrapper">
@@ -27,33 +30,58 @@ const NotSubscribed = () => (<section id="senales" className="main gradient-sect
 export const Signals: React.FC<RouteComponentProps> = () => {
     const [messages, setMessages] = useState([]);
     const [news, setNews] = useState([]);
+    const [message, setMessage] = useState('');
+    const [vipMessage, setVipMessage] = useState('');
 
     const { data } = useQuery(GET_SIGNALS)
-    useSubscription(VIP_SIGNALS, {
-        onSubscriptionData: ({ subscriptionData }) => {
-            const { vipSignal } = subscriptionData.data;
-            if (vipSignal) {
-                const updateNews = [...news, vipSignal]
-                setNews(updateNews);
-            }
+    const {data: signalSubscriptionData} = useSubscription(VIP_SIGNALS);
+    const {data: messageSubscriptionData} = useSubscription(VIP_MESSAGES);
+
+    const [sendMessage] = useMutation(SEND_MESSAGE);
+    const [sendSignal] = useMutation(SEND_SIGNAL);
+    useEffect(() => {
+        const { vipSignal } = signalSubscriptionData || {};
+        if (vipSignal) {
+            const updateNews = [...news, vipSignal]
+            setNews(updateNews);
         }
-      });
-    useSubscription(VIP_MESSAGES, {
-        onSubscriptionData: ({ subscriptionData }) => {
-            const { vipMessage } = subscriptionData.data;
-            if (vipMessage) {
-                const updateMessages = [...messages, vipMessage]
-                setMessages(updateMessages);
-            }
+    }, [signalSubscriptionData])
+
+    useEffect(() => {
+        const { vipMessage } = messageSubscriptionData || {};
+        if (vipMessage) {
+            const updateMessages = [...messages, vipMessage]
+            setMessages(updateMessages);
         }
-      });
+    }, [messageSubscriptionData])
+
+    const submitMessage = (ev) => {
+        ev.preventDefault();
+        sendMessage({
+            variables: {
+                message
+            }
+        });
+        setMessage('');
+    }
+
+    const submitVipMessage = (ev) => {
+        ev.preventDefault();
+        sendSignal({
+            variables: {
+                vipMessage
+            }
+        });
+        setVipMessage('');
+    }
+
     const signals = data?.signals || [];
     return (
         <Box display="flex" height="calc(100vh - 96px)">
             <Box flex={1} bgcolor={baseTheme.palette.secondary.main} padding={2}>
                 <Box
                     border={`1px solid ${baseTheme.palette.border.light}`}
-                    borderRadius={16}
+                    borderRadius={4}
                     height="100%" 
                     bgcolor={`${baseTheme.palette.primary.light}cc`}
                     overflow="auto"
@@ -64,16 +92,54 @@ export const Signals: React.FC<RouteComponentProps> = () => {
             <Box flex={2}>
                 <iframe width="100%" height="100%" src="https://iqoption.com/es" />
             </Box>
-            <Box flex={1} bgcolor={baseTheme.palette.secondary.main} padding={2}>
+            <Box flex={1} bgcolor={baseTheme.palette.secondary.main} padding={2} display="flex" flexDirection="column">
                 <Box
                     border={`1px solid ${baseTheme.palette.border.light}`}
-                    borderRadius={16}
-                    height="100%" 
+                    borderRadius={4}
                     bgcolor={`${baseTheme.palette.primary.light}cc`}
                     overflow="auto"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-end"
+                    flex={1}
+                    marginBottom={1}
+                >
+                    <MessageList messages={news} />
+                </Box>
+                {isAuthenticated(AdminRoles) && (<form onSubmit={submitVipMessage}>
+                    <TextField
+                        value={vipMessage}
+                        onChange={(ev) => setVipMessage(ev.currentTarget.value)}
+                        variant="outlined"
+                        color="primary"
+                        placeholder="Escribe un mensaje"
+                        fullWidth
+                    />
+                </form>)}
+                <Box
+                    border={`1px solid ${baseTheme.palette.border.light}`}
+                    borderRadius={4}
+                    bgcolor={`${baseTheme.palette.primary.light}cc`}
+                    overflow="auto"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="flex-end"
+                    flex={2}
+                    marginTop={1}
+                    marginBottom={1}
                 >
                     <MessageList messages={messages} />
                 </Box>
+                <form onSubmit={submitMessage}>
+                    <TextField
+                        value={message}
+                        onChange={(ev) => setMessage(ev.currentTarget.value)}
+                        variant="outlined"
+                        color="primary"
+                        placeholder="Escribe un mensaje"
+                        fullWidth
+                    />
+                </form>
             </Box>
         </Box>
     )

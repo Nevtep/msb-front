@@ -41,7 +41,7 @@ export default function SignalsList({ signals }) {
                 {signal.op === 'CALL' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={`${signal.pair} ${new Date(signal.time)}`}  />
+            <ListItemText primary={`${signal.pair} ${new Intl.DateTimeFormat('es-AR', { timeStyle: 'short' }).format(new Date(signal.time))}`}  />
           </ListItem>
         ))}
     </List>
