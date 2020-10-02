@@ -43,7 +43,7 @@ const uploadLink = createUploadLink({
 })
 // using the ability to split links, you can send data to each link
 // depending on what kind of operation is being sent
-const link = split(
+const link = process.browser ? split(
     // split based on operation type
     ({ query }) => {
       const definition = getMainDefinition(query);
@@ -54,7 +54,7 @@ const link = split(
     },
     wsLink,
     uploadLink,
-  );
+  ): uploadLink;
 const client = new ApolloClient({
     typeDefs,
     resolvers,
