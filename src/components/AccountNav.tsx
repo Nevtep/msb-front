@@ -39,8 +39,12 @@ const useStyles = makeStyles((theme) => ({
             }
         },
 
-        '& .account-avatar': {
+        '& .push-right': {
             marginLeft: 'auto',
+            marginRight: '2em'
+        },
+
+        '& .account-avatar': {
             marginRight: '2em'
         }
     }
@@ -61,11 +65,11 @@ export const AccountNav = ({initials, user}) => {
         <AppBar className={classes.accountNav} position="static">
             <Toolbar>
                 <span className="logo brand"></span>
-                <Link to="/app">Inicio</Link>
-                <Link to="/app/billing">Subscripciones</Link>
-                {isTrainee(user) && <Link to="/app/academy/courses">Academia</Link>}
-                {isVIP(user) && <Link to="/app/vip/signals">Señales VIP</Link>}
-                {isInvestor(user) && <Link to="/app/invest/zone">Inversores</Link>}
+                {/* <Link to="/app">Inicio</Link> */}
+                {isVIP(user) && <Link to="/app/vip/signals">Panel VIP</Link>}
+                {isVIP(user) && <Link to="/app/academy/courses">Academia</Link>}
+                {isVIP(user) && <Link to="/app/invest/zone">Inversores</Link>}
+                <Link className="push-right" to="/app/billing">Subscripciones</Link>
                 <Avatar className="account-avatar" onClick={handleClick}>{initials}</Avatar>
                 <Menu
                     id="simple-menu"

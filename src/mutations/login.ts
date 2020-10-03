@@ -13,6 +13,12 @@ export const LOGIN_MUTATION = gql`
         id
         fullName
         email
+        subscriptions {
+          id
+          startDate
+          endDate
+          name
+        }
       }
     }
   }

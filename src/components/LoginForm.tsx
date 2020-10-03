@@ -7,6 +7,7 @@ import { CURRENT_USER_QUERY } from '../queries/currentUser';
 import { LOGIN_MUTATION } from '../mutations/login';
 
 import { Nav } from './StaticNav';
+import { isAdmin, isVIP } from '../services/auth';
 
 const LoginDialog = ({ onCancel, }) => {
     const [login, { called, loading }] = useMutation(
@@ -21,9 +22,15 @@ const LoginDialog = ({ onCancel, }) => {
                     data: { currentUser: login.user },
                 });
             },
-            onCompleted: (result) => {
-                console.log(result);
-                navigate('/app')
+            onCompleted: ({ login }) => {
+                const { user } = login;
+                if (isAdmin(user)) {
+                    navigate('/app/admin/users');
+                } else if (isVIP(user)) {
+                    navigate('/app/vip/signals');
+                } else {
+                    navigate('/app/billing');
+                }
             },
             onError: (error) => {
                 const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));

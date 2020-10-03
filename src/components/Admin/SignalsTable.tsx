@@ -8,7 +8,7 @@ import { REMOVE_SIGNAL } from '../../mutations/removeSignal';
 import { GET_SIGNALS } from '../../queries/getSignals';
 import { useMutation } from '@apollo/react-hooks';
 import { Editable, ColumnData } from '../system/EditableTable';
-import { Input } from '@material-ui/core';
+import { Box, Input, Typography } from '@material-ui/core';
 
 
 const useStyles = makeStyles({
@@ -97,10 +97,10 @@ export default function SignalsTable({ signals, UploadButton }) {
       data={signals}
       columns={columns}
       title={(
-        <div>
-          <h1>Señales</h1>
+        <Box display="flex">
+          <Typography variant="h6">Señales</Typography>
           <UploadButton />
-        </div>
+        </Box>
       )}
       onRowAdd={onRowAdd}
       onRowDelete={onRowDelete}

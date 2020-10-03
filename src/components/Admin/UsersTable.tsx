@@ -104,7 +104,7 @@ export default function UsersTable({ users, onManageSubscriptions }) {
   return (
     <Editable
       data={users}
-      title={<><Input value="I'm an input" /></>}
+      title="Usuarios"
       columns={columns}
       onRowAdd={onRowAdd}
       onRowDelete={onRowDelete}

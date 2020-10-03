@@ -12,7 +12,7 @@ import MessageList from './MessageList';
 import { VIP_MESSAGES, VIP_SIGNALS } from '../subscriptions';
 import { SEND_MESSAGE } from '../mutations/sendMessage';
 import { SEND_SIGNAL } from '../mutations/sendSignal';
-import { AdminRoles, isAuthenticated } from '../services/auth';
+import { isAdmin } from '../services/auth';
 import SignalsBackground from '../assets/images/fondo-academia.jpg';
 import MessagesBackground from '../assets/images/fondo-inversores.jpg';
 import { useTheme } from '@material-ui/styles';
@@ -171,7 +171,7 @@ export const Signals: React.FC<SignalsProps> = ({ user }) => {
                 >
                     <MessageList messages={news} />
                 </Box>
-                {isAuthenticated(AdminRoles)(user) && (<form onSubmit={submitVipMessage}>
+                {isAdmin(user) && (<form onSubmit={submitVipMessage}>
                     <TextField
                         value={vipMessage}
                         onChange={(ev) => setVipMessage(ev.currentTarget.value)}

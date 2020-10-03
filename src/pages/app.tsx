@@ -45,11 +45,11 @@ const App = ({ location }) => {
         <ThemeProvider theme={theme}>
           <AccountNav initials={userInitials} user={data.currentUser} />
           <Router>
-            <Home path="/app" {...data.currentUser} />
-            <Settings path="/app/settings" />
+            {/* <Home path="/app" {...data.currentUser} /> */}
+            {/* <Settings path="/app/settings" /> */}
             <Billing path="/app/billing" user={data.currentUser} />
             <PrivateRoute
-              allowed={TraineeRoles}
+              allowed={VipRoles}
               user={data.currentUser}
               path="/app/academy/courses"
               location={location}
@@ -63,7 +63,7 @@ const App = ({ location }) => {
               component={Signals}
             />
             <PrivateRoute
-              allowed={InvestorRoles}
+              allowed={VipRoles}
               user={data.currentUser}
               path="/app/invest/zone"
               location={location}
