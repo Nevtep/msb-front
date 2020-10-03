@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
 import { Box, TextField } from '@material-ui/core';
 import { baseTheme } from '../assets/theme';
 import SignalsList from './SignalsList';
 import { useMutation, useQuery, useSubscription } from '@apollo/react-hooks';
+import { CurrentUserQuery_currentUser as User } from '../queries/__generated__/CurrentUserQuery';
 import { GET_SIGNALS } from '../queries/getSignals';
 import MessageList from './MessageList';
 import { VIP_MESSAGES, VIP_SIGNALS } from '../subscriptions';
 import { SEND_MESSAGE } from '../mutations/sendMessage';
 import { SEND_SIGNAL } from '../mutations/sendSignal';
 import { AdminRoles, isAuthenticated } from '../services/auth';
+import SignalsBackground from '../assets/images/fondo-academia.jpg';
+import MessagesBackground from '../assets/images/fondo-inversores.jpg';
+import { useTheme } from '@material-ui/styles';
 
 const NotSubscribed = () => (<section id="senales" className="main gradient-section">
 <div className="grid-wrapper">
@@ -27,7 +32,55 @@ const NotSubscribed = () => (<section id="senales" className="main gradient-sect
 </div>
 </section>);
 
-export const Signals: React.FC<RouteComponentProps> = () => {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    signals: {
+        backgroundAttachment: 'fixed',
+        backgroundImage: `url(${SignalsBackground})`,
+        backgroundPosition: 'right',
+        backgroundSize: 'cover',
+    },
+    messages: {
+        backgroundImage: `url(${MessagesBackground})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+    },
+  }),
+);
+
+
+const useInputStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+        '&:hover': {
+            '& $notchedOutline': {
+                borderColor: theme.palette.secondary.main
+            }
+        },
+        color: theme.palette.primary.dark
+    },
+    focused: {
+        '&:hover': {
+            '& $notchedOutline': {
+                borderColor: theme.palette.primary.main
+            }
+        },
+    },
+    notchedOutline: {
+        borderColor: theme.palette.secondary.main,
+        backgroundColor: `${baseTheme.palette.primary.light}33`
+    }
+  }),
+);
+
+interface SignalsProps extends RouteComponentProps {
+    user: User
+};
+
+export const Signals: React.FC<SignalsProps> = ({ user }) => {
+    const classes = useStyles();
+    const inputClasses = useInputStyles();
+    const theme = useTheme();
     const [messages, setMessages] = useState([]);
     const [news, setNews] = useState([]);
     const [message, setMessage] = useState('');
@@ -78,9 +131,14 @@ export const Signals: React.FC<RouteComponentProps> = () => {
     const signals = data?.signals || [];
     return (
         <Box display="flex" height="calc(100vh - 96px)">
-            <Box flex={1} bgcolor={baseTheme.palette.secondary.main} padding={2}>
+            <Box
+                className={classes.signals}
+                flex={1}
+                bgcolor={baseTheme.palette.secondary.main}
+                padding={2}
+            >
                 <Box
-                    border={`1px solid ${baseTheme.palette.border.light}`}
+                    border={`1px solid ${baseTheme.palette.secondary.main}`}
                     borderRadius={4}
                     height="100%" 
                     bgcolor={`${baseTheme.palette.primary.light}cc`}
@@ -92,9 +150,16 @@ export const Signals: React.FC<RouteComponentProps> = () => {
             <Box flex={2}>
                 <iframe width="100%" height="100%" src="https://iqoption.com/es" />
             </Box>
-            <Box flex={1} bgcolor={baseTheme.palette.secondary.main} padding={2} display="flex" flexDirection="column">
+            <Box
+                className={classes.messages}
+                flex={1}
+                bgcolor={baseTheme.palette.secondary.main}
+                padding={2}
+                display="flex"
+                flexDirection="column"
+            >
                 <Box
-                    border={`1px solid ${baseTheme.palette.border.light}`}
+                    border={`1px solid ${baseTheme.palette.secondary.main}`}
                     borderRadius={4}
                     bgcolor={`${baseTheme.palette.primary.light}cc`}
                     overflow="auto"
@@ -106,7 +171,7 @@ export const Signals: React.FC<RouteComponentProps> = () => {
                 >
                     <MessageList messages={news} />
                 </Box>
-                {isAuthenticated(AdminRoles) && (<form onSubmit={submitVipMessage}>
+                {isAuthenticated(AdminRoles)(user) && (<form onSubmit={submitVipMessage}>
                     <TextField
                         value={vipMessage}
                         onChange={(ev) => setVipMessage(ev.currentTarget.value)}
@@ -114,10 +179,13 @@ export const Signals: React.FC<RouteComponentProps> = () => {
                         color="primary"
                         placeholder="Escribe un mensaje"
                         fullWidth
+                        InputProps={{
+                            classes: inputClasses
+                        }}
                     />
                 </form>)}
                 <Box
-                    border={`1px solid ${baseTheme.palette.border.light}`}
+                    border={`1px solid ${baseTheme.palette.secondary.main}`}
                     borderRadius={4}
                     bgcolor={`${baseTheme.palette.primary.light}cc`}
                     overflow="auto"
@@ -138,6 +206,9 @@ export const Signals: React.FC<RouteComponentProps> = () => {
                         color="primary"
                         placeholder="Escribe un mensaje"
                         fullWidth
+                        InputProps={{
+                            classes: inputClasses
+                        }}
                     />
                 </form>
             </Box>

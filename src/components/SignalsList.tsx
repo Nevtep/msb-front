@@ -8,6 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import classNames from 'classnames';
+import { Box, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +42,15 @@ export default function SignalsList({ signals }) {
                 {signal.op === 'CALL' ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={`${signal.pair} ${new Intl.DateTimeFormat('es-AR', { timeStyle: 'short' }).format(new Date(signal.time))}`}  />
+            <ListItemText
+              disableTypography
+              primary={(
+                <Box display="flex" justifyContent="space-around">
+                  <Typography variant='h6'>{`${signal.pair.slice(0,3)} / ${signal.pair.slice(3)}`}</Typography>
+                  <Typography variant='h6'>{new Intl.DateTimeFormat('es-AR', { timeStyle: 'short' }).format(new Date(signal.time))}</Typography>
+                </Box>
+              )}
+            />
           </ListItem>
         ))}
     </List>
