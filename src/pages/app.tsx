@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import "../assets/scss/main.scss";
 
 import { Router } from "@reach/router"
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
@@ -24,7 +25,7 @@ const theme = createMuiTheme({
       main: '#FAF78C',
     },
     secondary: {
-      main: '#BB8644',
+      main: '#8F5E33',
     },
   },
 })

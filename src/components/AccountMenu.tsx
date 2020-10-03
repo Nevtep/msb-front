@@ -14,7 +14,7 @@ const AccountMenu = ({closeMenu}) => {
           query: CURRENT_USER_QUERY,
           data: { currentUser: null },
         }),
-        onCompleted: () => navigate('/')
+        onCompleted: () => window.location.href = window.location.origin
       },
     );
 
