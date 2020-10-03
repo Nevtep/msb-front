@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export const AccountNav = ({initials, user}) => {
+export const AccountNav = ({initials, user }) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -66,10 +66,10 @@ export const AccountNav = ({initials, user}) => {
             <Toolbar>
                 <span className="logo brand"></span>
                 {/* <Link to="/app">Inicio</Link> */}
-                {isVIP(user) && <Link to="/app/vip/signals">Panel VIP</Link>}
-                {isVIP(user) && <Link to="/app/academy/courses">Academia</Link>}
-                {isVIP(user) && <Link to="/app/invest/zone">Inversores</Link>}
-                <Link className="push-right" to="/app/billing">Subscripciones</Link>
+                {isVIP(user) && <Link to="/app/vip/signals" activeStyle={{ color: '#FAF78C'}}>Panel VIP</Link>}
+                {isVIP(user) && <Link to="/app/academy/courses" activeStyle={{ color: '#FAF78C'}}>Academia</Link>}
+                {isVIP(user) && <Link to="/app/invest/zone" activeStyle={{ color: '#FAF78C'}}>Inversores</Link>}
+                <Link className="push-right" to="/app/billing" activeStyle={{ color: '#FAF78C'}}>Subscripciones</Link>
                 <Avatar className="account-avatar" onClick={handleClick}>{initials}</Avatar>
                 <Menu
                     id="simple-menu"
