@@ -148,7 +148,7 @@ export const Signals: React.FC<SignalsProps> = ({ user }) => {
                 </Box>
             </Box>
             <Box flex={2}>
-                <iframe width="100%" height="100%" src="https://iqoption.com/es" />
+                <iframe width="100%" height="100%" src="https://iqoption.com/traderoom" />
             </Box>
             <Box
                 className={classes.messages}
