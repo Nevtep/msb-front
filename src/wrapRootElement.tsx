@@ -8,6 +8,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import * as typeDefs from './queries/schema.graphql';
+import { GraphQLScalarType, Kind } from 'graphql';
 
 const wsLink = process.browser ? new WebSocketLink({
   uri: process.env.GATSBY_WS_URI || 'ws://localhost:3000/graphql',
@@ -25,6 +26,22 @@ cache.writeData({
 });
 
 const resolvers = {
+    Date: new GraphQLScalarType({
+        name: 'Date',
+        description: 'Date custom scalar type',
+        parseValue(value) {
+          return new Date(value); // value from the client
+        },
+        serialize(value) {
+          return value.getTime(); // value sent to the client
+        },
+        parseLiteral(ast) {
+          if (ast.kind === Kind.INT) {
+            return new Date(+ast.value) // ast value is always in string format
+          }
+          return null;
+        },
+    }),
     Mutation: {
         selectUser: (_, { user }, context) => {
             cache.writeData({

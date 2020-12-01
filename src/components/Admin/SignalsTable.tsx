@@ -27,6 +27,7 @@ export default function SignalsTable({ signals, UploadButton }) {
       title: 'Hora',
       field: 'time',
       type: 'datetime',
+      render: rowData => <span>{new Date(rowData.time).toLocaleString()}</span>
     },
   ]);
   const [setSignal, { called, loading: setting }] = useMutation(

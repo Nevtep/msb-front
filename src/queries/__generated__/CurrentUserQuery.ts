@@ -7,17 +7,18 @@
 // GraphQL query operation: CurrentUserQuery
 // ====================================================
 
-export interface CurrentUserQuery_currentUser_services {
+export interface CurrentUserQuery_currentUser_subscriptions {
   __typename: "Service";
+  id: string | null;
   startDate: any | null;
   endDate: any | null;
-  role: string | null;
+  name: string | null;
 }
 
 export interface CurrentUserQuery_currentUser {
   __typename: "User";
   id: string | null;
-  services: (CurrentUserQuery_currentUser_services | null)[] | null;
+  subscriptions: (CurrentUserQuery_currentUser_subscriptions | null)[] | null;
   fullName: string | null;
   email: string | null;
 }

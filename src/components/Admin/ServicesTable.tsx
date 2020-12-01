@@ -26,8 +26,8 @@ export default function ServicesTable({ user, roles }) {
 }, {})
   const [columns, setColumns] = useState([
     { title: 'Rol', field: 'name', lookup: rolesLookup },
-    { title: 'Fecha de Inicio', field: 'startDate', type: 'date' },
-    { title: 'Fecha de Finalización', field: 'endDate', type: 'date' },
+    { title: 'Fecha de Inicio', field: 'startDate', type: 'date', render: rowData => <span>{new Date(rowData.startDate).toLocaleDateString()}</span> },
+    { title: 'Fecha de Finalización', field: 'endDate', type: 'date', render: rowData => <span>{new Date(rowData.endDate).toLocaleDateString()}</span> },
   ]);
   const [addRole, { called, loading: setting }] = useMutation(
     ADD_ROLE,

@@ -18,6 +18,7 @@ import { AdminSignals } from '../components/Admin/AdminSignals';
 import { AdminUsers } from '../components/Admin/AdminUsers';
 import { VipRoles, TraineeRoles, AdminRoles, InvestorRoles } from '../services/auth';
 import { navigate } from 'gatsby';
+import { AdminPlans } from '../components/Admin/AdminPlans';
 
 const theme = createMuiTheme({
   palette: {
@@ -82,6 +83,13 @@ const App = ({ location }) => {
               path="/app/admin/signals"
               location={location}
               component={AdminSignals}
+            />
+            <PrivateRoute
+              allowed={AdminRoles}
+              user={data.currentUser}
+              path="/app/admin/plans"
+              location={location}
+              component={AdminPlans}
             />
           </Router>
         </ThemeProvider>

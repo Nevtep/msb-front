@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { Box, Paper, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, ButtonBase, Typography, Button } from '@material-ui/core';
 import { PlanCard } from './Subscriptions/PlanCard';
+import { GET_PLANS } from '../queries/getPlans';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -9,32 +10,26 @@ import { HorizontalLinearStepper } from './Subscriptions/Stepper';
 import { OrderCheckout } from './Subscriptions/OrderCheckout';
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
 import { CurrentUserQuery_currentUser as User } from '../queries/__generated__/CurrentUserQuery';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { CONFIRM_SUBSCRIPTION } from '../mutations/confirmSubscription';
 import { ConfirmSubscription, ConfirmSubscriptionVariables } from '../mutations/__generated__/ConfirmSubscription';
-
-const plans = [
-  {
-    label: '15 dias',
-    value: 30
-  },
-  {
-    label: '1 Mes',
-    value: 50
-  },
-  {
-    label: '1 Año',
-    value: 200
-  },
-]
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface BillingProps extends RouteComponentProps {
   user: User
 }
 
 export const Billing: React.FC<BillingProps> = ({ user }) => {
-  const [selectedPlan, setSelectedPlan] = useState(plans[0]);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const { data = { plans: [] }, loading, error } = useQuery(
+    GET_PLANS,
+  );
+  const { plans } = data;
+  const [selectedPlan, setSelectedPlan] = useState({});
+  useEffect(() => {
+    setSelectedPlan(plans[0] || {});
+  }, [loading]);
+
+  const [activeStep, setActiveStep] = useState(0);
 
   const [confirmSubscription] = useMutation<ConfirmSubscription, ConfirmSubscriptionVariables>(CONFIRM_SUBSCRIPTION, {
     refetchQueries:[ {
@@ -70,12 +65,13 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
             justifyContent="space-evenly"
             width="100%"
           >
-            {plans.map((plan, index) => <PlanCard key={index} plan={plan} selected={selectedPlan.value === plan.value} onSelect={handleSelectSubscription} />)}
+            { loading && <CircularProgress />}
+            {plans.map((plan, index) => <PlanCard key={index} plan={plan} selected={selectedPlan.amount === plan.amount} onSelect={handleSelectSubscription} />)}
           </Box>
         )
       case 1:
         return (
-          <OrderCheckout amount={selectedPlan.value} referenceId={user.id} onTransactionCompleted={handleTransaction}/>
+          <OrderCheckout amount={selectedPlan.amount} referenceId={user.id} onTransactionCompleted={handleTransaction}/>
         )
       case 2:
         return (

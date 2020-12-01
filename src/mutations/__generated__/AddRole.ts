@@ -3,31 +3,33 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UserInput } from "./../../../__generated__/globalTypes";
-
 // ====================================================
-// GraphQL mutation operation: SetUser
+// GraphQL mutation operation: AddRole
 // ====================================================
 
-export interface SetUser_setUser_subscriptions {
+export interface AddRole_addRole_subscriptions {
   __typename: "Service";
+  id: string | null;
   startDate: any | null;
   endDate: any | null;
   name: string | null;
 }
 
-export interface SetUser_setUser {
+export interface AddRole_addRole {
   __typename: "User";
   id: string | null;
   email: string | null;
   fullName: string | null;
-  subscriptions: (SetUser_setUser_subscriptions | null)[] | null;
+  subscriptions: (AddRole_addRole_subscriptions | null)[] | null;
 }
 
-export interface SetUser {
-  setUser: SetUser_setUser | null;
+export interface AddRole {
+  addRole: AddRole_addRole | null;
 }
 
-export interface SetUserVariables {
-  user?: UserInput | null;
+export interface AddRoleVariables {
+  userId?: string | null;
+  name?: string | null;
+  startDate?: any | null;
+  endDate?: any | null;
 }

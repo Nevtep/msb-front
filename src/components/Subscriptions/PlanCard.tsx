@@ -1,16 +1,12 @@
 import React from 'react';
 import { Paper, Typography, Radio, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-
-type Plan = {
-    label: string
-    value: number
-}
+import { GetPlans_plans } from '../../queries/__generated__/GetPlans';
 
 type PlanCardProps = {
-    plan: Plan
+    plan: GetPlans_plans
     selected: boolean
-    onSelect: (plan: Plan) => void
+    onSelect: (plan: GetPlans_plans) => void
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +33,7 @@ export const PlanCard: React.FC<PlanCardProps> = ({
                 textAlign="center"
             >
                 <Typography variant="h5">{plan.label}</Typography>
-                <Typography variant="h4">${plan.value}.00</Typography>
+                <Typography variant="h4">${plan.amount}.00</Typography>
                 <Radio disableRipple checked={selected} />
             </Box>
         </Paper>

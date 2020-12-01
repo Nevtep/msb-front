@@ -7,17 +7,18 @@
 // GraphQL query operation: GetUsers
 // ====================================================
 
-export interface GetUsers_users_services {
+export interface GetUsers_users_subscriptions {
   __typename: "Service";
   startDate: any | null;
   endDate: any | null;
-  role: string | null;
+  name: string | null;
+  id: string | null;
 }
 
 export interface GetUsers_users {
   __typename: "User";
   id: string | null;
-  services: (GetUsers_users_services | null)[] | null;
+  subscriptions: (GetUsers_users_subscriptions | null)[] | null;
   fullName: string | null;
   email: string | null;
 }

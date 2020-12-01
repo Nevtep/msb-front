@@ -7,6 +7,11 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum OperationType {
+  CALL = "CALL",
+  PUT = "PUT",
+}
+
 export interface ServiceInput {
   id?: string | null;
   role?: string | null;

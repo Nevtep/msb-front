@@ -82,13 +82,17 @@ export const AccountNav = ({initials, user }) => {
                         <MenuItem>
                             <Link to="/app/admin/users">Administrar Usuarios</Link>
                         </MenuItem>
-)                    }
-{isAdmin(user) &&
-
-<MenuItem>
-<Link to="/app/admin/signals">Administrar Señales</Link>
-</MenuItem>
-}
+                    )}
+                    {isAdmin(user) &&
+                        <MenuItem>
+                            <Link to="/app/admin/signals">Administrar Señales</Link>
+                        </MenuItem>
+                    }
+                    {isAdmin(user) &&
+                        <MenuItem>
+                            <Link to="/app/admin/plans">Administrar Planes</Link>
+                        </MenuItem>
+                    }
                     <AccountMenu closeMenu={handleClose} />
                 </Menu>
             </Toolbar>
