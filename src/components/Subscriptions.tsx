@@ -100,24 +100,28 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
         textAlign="center"
       >
         <p>
-          PACK SEÑALES PROGRAMADAS
-          (SIN MARTINGALA): 
-          <br />
-          ATRAVEZ DE TELEGRAM DE LAS 7 AM A 16 PM HORA ARGENTINA.<br />
-          (SIN MARTINGALA)<br />
-          Las Programadas las Operamos hasta tener una Diferencia de un (2-0).(3-0).(4-0) .(5-0) y retirarnos y seguir al otro dia y salir siempre profit
-          <br />
-          ENVIAMOS ALREDEDOR DE 15 A 20 SEÑALES DIARIAS DE LUNES A VIERNES(SIN MARTINGALA)<br />
+          EL PACK DE SEÑALES CUENTA: <br />
+          
+          15 A 20 SEÑALES AL DIA (SIN MARTINGALA) EN EL HORARIO DE 10 AM A 12 AM. <br />
+          
+          -LAS SEÑALES LAS OPERAMOS CON VELAS DE 5 MINUTOS. <br />
+          
+          -LA EXPIRACION DE LAS SEÑALES SON A 5 MINUTOS. <br />
+          
+          -EL HORARIO QUE MANEJAMOS LAS SEÑALES SON SIEMPRE HORA ARGENTINA (BUENOS AIRES UTC-3) <br />
 
-          PACK SEÑALES CONFIRMADAS SIN MARTINGALA<br />
+          -PUEDES OPERAR CON IQOPTION DENTRO DE NUESTRA PLATAFORMA <br />
 
-          LAS SEÑALES SE ENVIAN DE 10 AM A 12 AM HORA ARGENTINA Y NO SE UTILIZA MARTINGALA...<br />
-
-          SEÑALES DADAS POR ALEX<br />
-
-          ⏰HORA ARGENTINA<br />
-          ⏰VELAS DE 5 MINUTOS<br />
-          ⏰EXPIRACION 5 MINUTOS<br />
+         ⏰HORA ARGENTINA <br />
+          ⏰VELAS DE 5 MINUTOS <br />
+          ⏰EXPIRACION 5 MINUTOS <br />
+          METODOS DE PAGO:
+-SKRILL
+-NETELLER
+-UALA
+-PESOS ARGENTINOS
+-PAYPAL
+-TARJETA DE CREDITO-DEBITO <br />
         </p>
         <p>
           Podés pagar con PayPal o tarjetas de Crédito/Débito eligiendo uno de estos planes y cliqueando confirmar
