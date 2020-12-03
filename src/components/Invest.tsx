@@ -11,7 +11,7 @@ export const Invest: React.FC<RouteComponentProps> = () => <section id="inversor
         </header>
         <p>En escazas ocasiones permitimos a un cupo limitado de personas, acceder a invertir con nosotros. Los elegidos podrán acceder a importante rentabilidad mensual gracias a la ayuda de la inversión directa de nuestros Master Traders.  Puedes inscribirte y nos comunicaremos en el momento que se abra el acceso a la inversiones.</p>
         <ul className="actions">
-            <li><Link to="/app/billing" className="button">Conviértete en Inversor</Link></li>
+            <li><a href="https://t.me/SOPORTE_MSB" className="button">Conviértete en Inversor</a></li>
         </ul>
     </div>
     <div className="col-6">
