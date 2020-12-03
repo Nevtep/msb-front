@@ -46,11 +46,11 @@ const App = ({ location }) => {
     return (
       <div className="account-main">
         <ThemeProvider theme={theme}>
-          <div className="portrait-warning">
+          {/* <div className="portrait-warning">
             <StayPrimaryLandscapeIcon fontSize="inherit"/>
             <p>Te sujerimos que gires tu teléfono para una mejor experiencia</p>
             <CachedIcon fontSize="inherit"/>
-          </div>
+          </div> */}
           <AccountNav initials={userInitials} user={data.currentUser} />
           <Router>
             {/* <Home path="/app" {...data.currentUser} /> */}

@@ -119,6 +119,9 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
           ⏰VELAS DE 5 MINUTOS<br />
           ⏰EXPIRACION 5 MINUTOS<br />
         </p>
+        <p>
+          Podés pagar con PayPal o tarjetas de Crédito/Débito eligiendo uno de estos planes y cliqueando confirmar
+        </p>
       </Box>
       <Box
         marginY={3}
@@ -128,7 +131,7 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
       </Box>
       {getStepContent(activeStep)}
       <Box marginTop={3} textAlign="center">
-        {activeStep === 0 && (
+        {activeStep === 0 && (<>
           <Button
             variant="contained"
             color="primary"
@@ -137,7 +140,15 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
           >
             Confirmar
           </Button>
-        )}
+          <Box marginTop="4rem">
+            <p>
+              Si querés pagar por Skrill, Neteller, UALA, o Pesos Argentinos, comunicate con nosotros.
+            </p>
+            <ul className="actions">
+                <li><a href="https://t.me/SOPORTE_MSB" target="_blank" className="button">Contáctanos</a></li>
+            </ul>
+          </Box>
+        </>)}
         {activeStep === 1 && (
           <Button
             variant="contained"
