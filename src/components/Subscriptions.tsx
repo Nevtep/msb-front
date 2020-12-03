@@ -5,6 +5,7 @@ import { PlanCard } from './Subscriptions/PlanCard';
 import { GET_PLANS } from '../queries/getPlans';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import BackspaceIcon from '@material-ui/icons/Backspace';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { HorizontalLinearStepper } from './Subscriptions/Stepper';
 import { OrderCheckout } from './Subscriptions/OrderCheckout';
@@ -14,6 +15,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { CONFIRM_SUBSCRIPTION } from '../mutations/confirmSubscription';
 import { ConfirmSubscription, ConfirmSubscriptionVariables } from '../mutations/__generated__/ConfirmSubscription';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { navigate } from 'gatsby';
 
 interface BillingProps extends RouteComponentProps {
   user: User
@@ -56,6 +58,10 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
     setSelectedPlan(plan);
   }
 
+  const goToPanel = () => {
+    navigate('/app/vip/signals')
+  }
+
   const getStepContent = (step: number) => {
     switch (step) {
       case 0: 
@@ -80,7 +86,7 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
     }
   }
 
-  return (<main>
+  return (<main><section id="subscription" className="main subscription">
     <Box
       display="flex"
       flexDirection="column"
@@ -89,6 +95,31 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
       <Typography variant="h3">
       Subscripción
       </Typography>
+      <Box
+        marginY={3}
+        textAlign="center"
+      >
+        <p>
+          PACK SEÑALES PROGRAMADAS
+          (SIN MARTINGALA): 
+          <br />
+          ATRAVEZ DE TELEGRAM DE LAS 7 AM A 16 PM HORA ARGENTINA.<br />
+          (SIN MARTINGALA)<br />
+          Las Programadas las Operamos hasta tener una Diferencia de un (2-0).(3-0).(4-0) .(5-0) y retirarnos y seguir al otro dia y salir siempre profit
+          <br />
+          ENVIAMOS ALREDEDOR DE 15 A 20 SEÑALES DIARIAS DE LUNES A VIERNES(SIN MARTINGALA)<br />
+
+          PACK SEÑALES CONFIRMADAS SIN MARTINGALA<br />
+
+          LAS SEÑALES SE ENVIAN DE 10 AM A 12 AM HORA ARGENTINA Y NO SE UTILIZA MARTINGALA...<br />
+
+          SEÑALES DADAS POR ALEX<br />
+
+          ⏰HORA ARGENTINA<br />
+          ⏰VELAS DE 5 MINUTOS<br />
+          ⏰EXPIRACION 5 MINUTOS<br />
+        </p>
+      </Box>
       <Box
         marginY={3}
         textAlign="center"
@@ -117,7 +148,18 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
             Cancelar
           </Button>
         )}
+        {activeStep === 2 && (
+          <Button
+            variant="contained"
+            color="primary"
+            startIcon={(<TrendingUpIcon />)}
+            onClick={goToPanel}
+          >
+            Ir al Panel VIP
+          </Button>
+        )}
       </Box>
     </Box>
+    </section>
   </main>)
 }

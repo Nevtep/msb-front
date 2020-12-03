@@ -5,11 +5,14 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { baseTheme } from '../../assets/theme';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
+      borderRadius: '8px',
+      backgroundColor: `${baseTheme.palette.primary.light}33`,
     },
     button: {
       marginRight: theme.spacing(1),
@@ -18,6 +21,12 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(1),
       marginBottom: theme.spacing(1),
     },
+    label: {
+      color: baseTheme.palette.text.white,
+      '&.MuiStepLabel-active': {
+        color: baseTheme.palette.text.white,
+      }
+    }
   }),
 );
 
@@ -43,13 +52,13 @@ export const HorizontalLinearStepper = ({ activeStep, steps }) => {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper activeStep={activeStep} alternativeLabel classes={classes}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: { optional?: React.ReactNode } = {};
           return (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel classes={{alternativeLabel:classes.label}}>{label}</StepLabel>
             </Step>
           );
         })}

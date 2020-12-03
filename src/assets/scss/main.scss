@@ -178,6 +178,23 @@ body {
 		@import './button';
 
 		height: 100vh;
+		&.subscription {
+			background-image: url('../images/fondo-head.jpg');
+			display: flex;
+			justify-content: center;
+			background-size: cover;
+			background-repeat: round;
+			padding: 2em;
+
+			p, h3 {
+				color: #FFF;
+			}
+
+			p {
+				font-size: large;
+				font-weight: bold;
+			}
+		}
 
 		&.gradient-section {
 			@include dark(#333);

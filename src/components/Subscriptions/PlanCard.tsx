@@ -12,7 +12,7 @@ type PlanCardProps = {
 const useStyles = makeStyles((theme) => ({
     root: {
         flexBasis: '15%',
-        minHeight: '15rem'
+        minHeight: '10rem'
     }
 }))
 
