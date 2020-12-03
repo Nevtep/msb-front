@@ -9,6 +9,7 @@ import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import * as typeDefs from './queries/schema.graphql';
 import { GraphQLScalarType, Kind } from 'graphql';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const wsLink = process.browser ? new WebSocketLink({
   uri: process.env.GATSBY_WS_URI || 'ws://localhost:3000/graphql',
@@ -78,12 +79,13 @@ const client = new ApolloClient({
     cache,
     link: link,
 });
-
 export const wrapRootElement = ({ element }) => {
 
     return(
         <ApolloProvider client={client}>
+          <GoogleReCaptchaProvider reCaptchaKey="6Ldj9_YZAAAAAGetAkb8RRaMsZDUItxv1wTiRkVj">
             {element}
+          </GoogleReCaptchaProvider>
         </ApolloProvider>
   )
 }

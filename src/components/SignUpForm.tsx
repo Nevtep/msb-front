@@ -5,8 +5,11 @@ import { SIGNUP_MUTATION } from '../mutations/signUp';
 import { CURRENT_USER_QUERY } from '../queries/currentUser';
 import AuthWithFacebook from './auth/AuthWithFacebook';
 import { Nav } from './StaticNav';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const SignupForm = () => {
+    const { executeRecaptcha } = useGoogleReCaptcha()
+    const [token, setToken] = useState('')
     const [signup] = useMutation(
         SIGNUP_MUTATION,
         {
@@ -19,9 +22,12 @@ const SignupForm = () => {
                     data: { currentUser: signup.user },
                 })
             },
-            onCompleted: (result) => {
-                console.log(result);
-                navigate('/app')
+            onCompleted: ({ signup }) => {
+                if(!!signup) {
+                    navigate('/app/billing');
+                } else {
+                    setErrors([{ message: 'Ocurrió un error',  }])
+                }
             },
             onError: (error) => {
                 const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));
@@ -34,14 +40,20 @@ const SignupForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         setErrors([]);
+        if(!executeRecaptcha) {
+            return;
+        }
         if(password == passwordConfirm) {
+            const challenge = await executeRecaptcha('signup');
+            setToken(challenge);
             signup({ variables: {
                 fullName,
                 email,
-                password
+                password,
+                token: challenge
             }});
         } else {
             setErrors([{ key: 0, message: 'Los password no coinciden.' } ])

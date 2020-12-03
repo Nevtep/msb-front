@@ -19,6 +19,8 @@ import { AdminUsers } from '../components/Admin/AdminUsers';
 import { VipRoles, TraineeRoles, AdminRoles, InvestorRoles } from '../services/auth';
 import { navigate } from 'gatsby';
 import { AdminPlans } from '../components/Admin/AdminPlans';
+import StayPrimaryLandscapeIcon from '@material-ui/icons/StayPrimaryLandscape';
+import CachedIcon from '@material-ui/icons/Cached';
 
 const theme = createMuiTheme({
   palette: {
@@ -44,6 +46,11 @@ const App = ({ location }) => {
     return (
       <div className="account-main">
         <ThemeProvider theme={theme}>
+          <div className="portrait-warning">
+            <StayPrimaryLandscapeIcon fontSize="inherit"/>
+            <p>Te sujerimos que gires tu teléfono para una mejor experiencia</p>
+            <CachedIcon fontSize="inherit"/>
+          </div>
           <AccountNav initials={userInitials} user={data.currentUser} />
           <Router>
             {/* <Home path="/app" {...data.currentUser} /> */}

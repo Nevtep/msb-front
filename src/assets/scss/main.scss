@@ -153,7 +153,32 @@ body {
 	height: 100vh;
 	font-family: "Source Sans Pro", Helvetica, sans-serif;
 	/* Main */
+	& > .portrait-warning {
+		border-color: _palette(accent6);
+		background-color: rgba(red(_palette(accent2)),green(_palette(accent2)),blue(_palette(accent2)), 0.8);
+		display: flex;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 99999999999;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		font-size: 4rem;
 
+		p {
+			text-align: center;
+			font-size: 2rem;
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+
+		@media screen and (orientation:landscape) {
+			display: none;
+		}
+	}
 	.main {
 		@include padding(6em, 0);
 

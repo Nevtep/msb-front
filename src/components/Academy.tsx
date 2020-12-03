@@ -26,7 +26,7 @@ export const Academy: React.FC<RouteComponentProps> = () => <section id="academi
         <p>En nuestra Academia accederás a información exclusiva, te guiaremos paso a paso para que entiendas el manejo de herramientas necesarias para convertirte en inversor profesional y exitoso. Accederás a información de los mercados de capitales que pocas personas tienen posibilidad de conocer. Sobre todo te guiaremos en el camino de obtener tu independencia económica y que logres cambiar tu vida a lo que siempre has soñado.</p>
         <p>Te enseñaremos uso básico de IQOption, estrategias, y análisis técnico. Vamos a apreder a utilizar las señales con todo lo cursado para que seas un trader verdaderamente rentable.</p>
         <ul className="actions">
-            <li><a href="https://t.me/SOPORTE_MSB" className="button">Subscribite</a></li>
+            <li><a href="https://t.me/SOPORTE_MSB" target="_blank" className="button">Subscribite</a></li>
         </ul>
     </div>
 </div>
