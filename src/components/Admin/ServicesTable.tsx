@@ -69,6 +69,35 @@ export default function ServicesTable({ user, roles }) {
   const [removeRole, { called: removed, loading: removing }] = useMutation(
     REMOVE_ROLE,
     {
+      update: async (cache, { data: { removeRole: user }}) => {
+        console.log(user);
+        const {users}: any = await cache.readQuery({
+          query: GET_USERS
+        });
+        const dataUpdate: any = [...users]
+        const index = users.indexOf(users.find(u => u.email === user.email));
+        if (index > -1) {
+          const data = {
+            ...dataUpdate[index],
+            ...user
+          }
+          dataUpdate[index] = data;
+        } else {
+          dataUpdate.push(user);
+        }
+        cache.writeQuery({
+          query: GET_USERS,
+          data: {
+            users: dataUpdate
+          }
+        })
+        // cache.writeQuery({
+        //   query: SELECTED_USER,
+        //   data: {
+        //     selectedUser: user
+        //   }
+        // })
+      },
         onCompleted: (result) => {
             console.log('addRole finished:', result);
         },
