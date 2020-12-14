@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'gatsby';
-import { Box, TextField } from '@material-ui/core';
+import { Box, TextField, Typography } from '@material-ui/core';
 import { baseTheme } from '../assets/theme';
 import SignalsList from './SignalsList';
 import { useMutation, useQuery, useSubscription } from '@apollo/react-hooks';
@@ -137,10 +137,13 @@ export const Signals: React.FC<SignalsProps> = ({ user }) => {
                 bgcolor={baseTheme.palette.secondary.main}
                 padding={2}
             >
+                <Typography variant="h5" color="primary">
+                    Señales
+                </Typography>
                 <Box
                     border={`1px solid ${baseTheme.palette.secondary.main}`}
                     borderRadius={4}
-                    height="100%" 
+                    height="95%" 
                     bgcolor={`${baseTheme.palette.primary.light}cc`}
                     overflow="auto"
                 >
@@ -158,6 +161,9 @@ export const Signals: React.FC<SignalsProps> = ({ user }) => {
                 display="flex"
                 flexDirection="column"
             >
+                <Typography variant="h5" color="primary">
+                    Anuncios
+                </Typography>
                 <Box
                     border={`1px solid ${baseTheme.palette.secondary.main}`}
                     borderRadius={4}
@@ -184,6 +190,11 @@ export const Signals: React.FC<SignalsProps> = ({ user }) => {
                         }}
                     />
                 </form>)}
+                <Box marginTop={1}>
+                    <Typography variant="h5" color="primary">
+                        Chat
+                    </Typography>
+                </Box>
                 <Box
                     border={`1px solid ${baseTheme.palette.secondary.main}`}
                     borderRadius={4}
