@@ -90,13 +90,12 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
     <Box
       display="flex"
       flexDirection="column"
-      marginTop={3}
     >
       <Typography variant="h3">
       Subscripción
       </Typography>
       <Box
-        marginY={3}
+        marginY={1}
         textAlign="center"
       >
         <p>
@@ -144,7 +143,7 @@ export const Billing: React.FC<BillingProps> = ({ user }) => {
           >
             Confirmar
           </Button>
-          <Box marginTop="4rem">
+          <Box marginTop="2rem">
             <p>
               Si querés pagar por Skrill, Neteller, UALA, o Pesos Argentinos, comunicate con nosotros.
             </p>
