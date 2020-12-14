@@ -68,9 +68,6 @@ export default function UsersTable({ users, onManageSubscriptions }) {
             const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));
             setErrors(newErrors);
         },
-        refetchQueries: [{
-          query: GET_USERS,
-        }],
     }
   )
   const [deleteUser, { loading: deleting }] = useMutation(DELETE_USER,{

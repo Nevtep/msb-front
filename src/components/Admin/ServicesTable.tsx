@@ -32,31 +32,31 @@ export default function ServicesTable({ user, roles }) {
   const [addRole, { called, loading: setting }] = useMutation(
     ADD_ROLE,
     {
-        // update: async (cache, { data: { addRole: user }}) => {
-        //   console.log(user);
-        //   const {users}: any = await cache.readQuery({
-        //     query: GET_USERS
-        //   });
-        //   const dataUpdate: any = [...users]
-        //   const index = users.indexOf(users.find(u => u.email === user.email));
-        //   if (index > -1) {
-        //     dataUpdate[index] = user;
-        //   } else {
-        //     dataUpdate.push(user);
-        //   }
-        //   cache.writeQuery({
-        //     query: GET_USERS,
-        //     data: {
-        //       users: dataUpdate
-        //     }
-        //   })
-        //   cache.writeQuery({
-        //     query: SELECTED_USER,
-        //     data: {
-        //       selectedUser: user
-        //     }
-        //   })
-        // },
+        update: async (cache, { data: { addRole: user }}) => {
+          console.log(user);
+          const {users}: any = await cache.readQuery({
+            query: GET_USERS
+          });
+          const dataUpdate: any = [...users]
+          const index = users.indexOf(users.find(u => u.email === user.email));
+          if (index > -1) {
+            dataUpdate[index] = user;
+          } else {
+            dataUpdate.push(user);
+          }
+          cache.writeQuery({
+            query: GET_USERS,
+            data: {
+              users: dataUpdate
+            }
+          })
+          // cache.writeQuery({
+          //   query: SELECTED_USER,
+          //   data: {
+          //     selectedUser: user
+          //   }
+          // })
+        },
         onCompleted: (result) => {
             console.log('addRole finished:', result);
         },
@@ -64,9 +64,6 @@ export default function ServicesTable({ user, roles }) {
             const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));
             setErrors(newErrors);
         },
-        refetchQueries: [{
-          query: GET_USERS,
-        }],
     }
   )
   const [removeRole, { called: removed, loading: removing }] = useMutation(
@@ -79,9 +76,6 @@ export default function ServicesTable({ user, roles }) {
             const newErrors = error.graphQLErrors.map(error => ({ message: error.message, key: error.path }));
             setErrors(newErrors);
         },
-        refetchQueries: [{
-          query: GET_USERS,
-        }],
     }
   )
 
