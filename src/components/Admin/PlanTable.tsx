@@ -31,26 +31,25 @@ export default function PlansTable({ plans, roles }) {
   const columns = [
     { title: 'Titulo', field: 'label' },
     { title: 'Valor', field: 'amount', type: 'numeric' },
-    { title: 'Rol', field: 'role', lookup: rolesLookup },
+    { title: 'Rol', field: 'role', lookup: rolesLookup, initialEditValue: rolesLookup['VIP'] },
     {
       title: 'Duración',
       field: 'duration',
+      initialEditValue: [15, 'd'],
       editComponent: props => {
         const units = [
           { label: 'Dia', value: 'd' },
           { label: 'Mes', value: 'M' },
           { label: 'Año', value: 'y' },
-        ]
-        const [amount, setAmount] = useState(15);
-        const [unit, setUnit] = useState(units[0].value)
+        ];
         return (<>
           <TextField
             type="text"
             label="Cantidad"
-            value={amount}
+            value={props.value[0]}
             onChange={e => {
-              setAmount(parseInt(e.target.value))
-              props.onChange([parseInt(e.target.value), unit])
+              console.log([parseInt(e.target.value || '0'), props.value[1]])
+              props.onChange([parseInt(e.target.value || '0'), props.value[1]])
             }}
           />
           <FormControl className={classes.formControl}>
@@ -58,10 +57,10 @@ export default function PlansTable({ plans, roles }) {
             <Select
               labelId="unit-select-label"
               id="unit-select"
-              value={unit}
+              value={props.value[1]}
               onChange={e => {
-                setUnit(e.target.value as string)
-                props.onChange([amount, e.target.value])
+                console.log([props.value[0], e.target.value])
+                props.onChange([props.value[0], e.target.value])
               }}
             >
               {units.map(unitData => <MenuItem key={unitData.value} value={unitData.value}>{unitData.label}</MenuItem>)}
@@ -113,6 +112,10 @@ export default function PlansTable({ plans, roles }) {
 
   const onRowAdd = ({__typename, ...plan}: ColumnData): Promise<any> =>{
   console.log('new plan: %o', plan);
+    if(plan.label &&
+      plan.amount !== undefined &&
+      plan.duration?.length !== 0 &&
+      plan.role !== undefined) {
     return setPlan({ 
       variables: {
         plan: {
@@ -121,6 +124,9 @@ export default function PlansTable({ plans, roles }) {
         }
       }
     });
+  } else {
+    return Promise.reject();
+  }
 }
   const onRowUpdate = ({__typename, ...plan}: ColumnData, oldData: ColumnData): Promise<any> => {
   console.log('new plan: %o', plan);
